@@ -1,0 +1,55 @@
+<mat-toolbar *ngIf="exibir">
+	<img src="../../../assets/bantads_light.svg" alt="homepage" routerLink="banTads/src/assets/bantads.svg"
+		class="navbar-logo">
+</mat-toolbar>
+
+<mat-nav-list *ngIf="exibir">
+	<a routerLink="/dashboard" href="#" class="list-group-item list-group-item-action">
+		<mat-icon>home</mat-icon><span> Página Inicial</span>
+	</a>
+	<ng-container *ngIf="checkRole('ADMIN')">
+		<a routerLink="/relatorio-de-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>assessment</mat-icon><span> Relatório de Clientes</span>
+		</a>
+		<a routerLink="/gestao-de-gerentes" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>people</mat-icon><span> Gestão de Gerentes</span>
+		</a>
+	</ng-container>
+
+	<ng-container *ngIf="checkRole('GERENTE')">
+		<a routerLink="/clientes/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>group</mat-icon><span> Clientes</span>
+		</a>
+		<a routerLink="/consultar-cliente" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>description</mat-icon><span> Consulta Cliente</span>
+		</a>
+		<a routerLink="/melhores-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>star</mat-icon><span> Melhores Clientes</span>
+		</a>
+	</ng-container>
+
+	<ng-container *ngIf="checkRole('CLIENTE')">
+		<a routerLink="/cliente/depositos" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>attach_money</mat-icon><span> Depósito</span>
+		</a>
+		<a routerLink="/cliente/saques" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>local_atm</mat-icon><span> Saque</span>
+		</a>
+		<a routerLink="/cliente/transferencia" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>compare_arrows</mat-icon><span> Transferência</span>
+		</a>
+		<a routerLink="/cliente/extratos" href="#" class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>receipt</mat-icon><span> Extrato</span>
+		</a>
+	</ng-container>
+	<!-- ADICIONAR .ID NO FINAL DE USUARIO LOGADO -->
+	<a [routerLink]="'/meu-perfil/' + usuarioLogado" href="#"
+		class="list-group-item list-group-item-action py-2 ripple">
+		<mat-icon>person</mat-icon><span> Meu Perfil</span>
+	</a>
+
+	<a (click)="logout()" routerLink="login" class="list-group-item list-group-item" id="sair">
+		<mat-icon>exit_to_app</mat-icon><span> Sair</span>
+	</a>
+
+</mat-nav-list>
