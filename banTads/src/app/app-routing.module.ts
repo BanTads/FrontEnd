@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -21,9 +22,11 @@ const routes: Routes = [
       // {
       //   path: 'gestao-de-gerentes'
       // },
-      // {
-      //   path: 'consultar-cliente'
-      // },
+      {
+        path: 'consulta-cliente',
+        component: ConsultaClienteComponent,
+        title: 'Consultar Cliente'
+      },
       // {
       //   path: 'melhores-clientes',
 

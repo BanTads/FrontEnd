@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
     DashboardComponent,
     MainComponent,
     NavbarComponent,
+    ConsultaClienteComponent,
   ],
   imports: [
     BrowserModule,
