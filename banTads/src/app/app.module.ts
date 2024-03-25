@@ -19,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
+import { AutocadastroComponent } from './pages/autocadastro/autocadastro.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cl
     MainComponent,
     NavbarComponent,
     ConsultaClienteComponent,
+    AutocadastroComponent,
   ],
   imports: [
     BrowserModule,
