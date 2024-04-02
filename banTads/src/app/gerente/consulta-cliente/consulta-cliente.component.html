@@ -1,1 +1,42 @@
-<p>consulta-cliente works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container" ng-app="consultaCliente" ng-controller="consultaController">
+        <form ng-submit="buscarClientes()">
+            <div class="form-group">
+                <label for="tipoConsulta">Tipo de Consulta: </label>
+                <select id="tipoConsulta" ng-model="tipoConsulta">
+                    <option value="cpf">CPF </option>
+                    <option value="contaAgencia">Agência e Conta </option>
+                </select>
+            </div>
+            <br><hr><br>
+            <div ng-show="tipoConsulta === 'cpf'">
+                <div class="form-group">
+                    <label for="cpfInput">CPF (apenas números): </label>
+                    <input type="text" id="cpfInput" ng-model="cpf" placeholder="000.000.000-00">
+                </div>
+            </div>
+            <br>
+            <div ng-show="tipoConsulta === 'contaAgencia'">
+                <div class="form-group">
+                    <label for="agenciaInput">Agência (sem dígito): </label>
+                    <input type="text" id="agenciaInput" ng-model="agencia" placeholder="0000">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="contaInput">Conta (com dígito) :</label>
+                    <input type="text" id="contaInput" ng-model="numeroConta" placeholder="000000-0">
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Consultar Cliente">
+            </div>
+        </form>
+    </div> 
+</body>
+</html>
