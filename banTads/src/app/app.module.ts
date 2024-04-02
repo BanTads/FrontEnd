@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
 import { AutocadastroComponent } from './pages/autocadastro/autocadastro.component';
+import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AutocadastroComponent } from './pages/autocadastro/autocadastro.compone
     NavbarComponent,
     ConsultaClienteComponent,
     AutocadastroComponent,
+    ListarClientesComponent,
   ],
   imports: [
     BrowserModule,
