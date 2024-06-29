@@ -18,6 +18,7 @@ import { SelfRegisterComponent } from './pages/login/self-register/self-register
 import {MatFormField} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "./material/material.module";
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MaterialModule} from "./material/material.module";
     NavbarComponent,
     LoginComponent,
     SelfRegisterComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
