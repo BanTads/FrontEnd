@@ -19,6 +19,9 @@ import {MatFormField} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "./material/material.module";
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { ClienteComponent } from './pages/cliente/cliente.component';
+import { SquareCardComponent } from './components/cards/square-card/square-card.component';
+import { SquareButtonComponent } from './components/buttons/square-button/square-button.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     LoginComponent,
     SelfRegisterComponent,
     UserDetailsComponent,
+    ClienteComponent,
+    SquareCardComponent,
+    SquareButtonComponent,
   ],
   imports: [
     BrowserModule,

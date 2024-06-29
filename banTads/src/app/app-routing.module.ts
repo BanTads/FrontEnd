@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {LoginComponent} from "./pages/login/login/login.component";
+import {ClienteComponent} from "./pages/cliente/cliente.component";
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -20,6 +21,11 @@ const routes: Routes = [
         component: DashboardComponent,
         title: 'Pagina Inicial'
       },
+      {
+        path: 'cliente',
+        component: ClienteComponent,
+        title: 'Página Inicial'
+      }
       // {
       //   path: 'relatorio-de-clientes'
       // },

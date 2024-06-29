@@ -9,12 +9,12 @@ import {Router} from "@angular/router";
 })
 export class UserDetailsComponent {
   exibir: boolean = true;
-  userName = "";
+  userName = "Leonardo Hortmann";
   usuarioLogado: Usuario = new Usuario();
 
   grr = "";
   name = this.userName.split(/[, ]+/);
-  displayName = '';
+  displayName = 'Leonardo Hortmann';
 
   constructor(
     private router: Router
