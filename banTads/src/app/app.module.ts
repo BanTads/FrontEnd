@@ -5,11 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { MainComponent } from './components/main/main.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,6 +13,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { LoginComponent } from './pages/login/login/login.component';
+import { SelfRegisterComponent } from './pages/login/self-register/self-register.component';
+import {MatFormField} from "@angular/material/form-field";
+import {FormsModule} from "@angular/forms";
+import {MaterialModule} from "./material/material.module";
 
 @NgModule({
   declarations: [
@@ -25,21 +25,21 @@ import { MatSortModule } from '@angular/material/sort';
     DashboardComponent,
     MainComponent,
     NavbarComponent,
+    LoginComponent,
+    SelfRegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormField,
+    FormsModule,
+    MaterialModule
   ],
   providers: [
     provideAnimationsAsync()
@@ -47,3 +47,4 @@ import { MatSortModule } from '@angular/material/sort';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
