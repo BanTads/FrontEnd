@@ -22,6 +22,11 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { SquareCardComponent } from './components/cards/square-card/square-card.component';
 import { SquareButtonComponent } from './components/buttons/square-button/square-button.component';
+import { RectangularCardComponent } from './components/cards/rectangular-card/rectangular-card.component';
+import { TableCardComponent } from './components/cards/table-card/table-card.component';
+import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { GerenteComponent } from './pages/gerente/gerente.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,11 @@ import { SquareButtonComponent } from './components/buttons/square-button/square
     ClienteComponent,
     SquareCardComponent,
     SquareButtonComponent,
+    RectangularCardComponent,
+    TableCardComponent,
+    EditarPerfilComponent,
+    GerenteComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
