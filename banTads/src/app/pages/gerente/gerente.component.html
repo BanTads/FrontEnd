@@ -1,4 +1,3 @@
-<!--<p>Funciona</p>-->
 <div class="let-of-cards">
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
@@ -9,8 +8,8 @@
   <ng-container>
     <ng-container *ngIf="usuarios.length > 0">
       <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
-                     [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Salário'" [secondValue]="usuario.email"
-                     [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="openDialog(usuario)">
+                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Salário'" [secondValue]="usuario.email"
+                            [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="openDialog(usuario)">
       </app-rectangular-card>
     </ng-container>
   </ng-container>
