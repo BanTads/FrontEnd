@@ -27,6 +27,8 @@ import { TableCardComponent } from './components/cards/table-card/table-card.com
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
 import { GerenteComponent } from './pages/gerente/gerente.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
+import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     EditarPerfilComponent,
     GerenteComponent,
     AdminComponent,
+    ListarClienteComponent,
+    ConsultarClienteComponent
   ],
   imports: [
     BrowserModule,
