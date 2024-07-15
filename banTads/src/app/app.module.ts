@@ -21,8 +21,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
 import { AutocadastroComponent } from './pages/autocadastro/autocadastro.component';
 import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
-import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
-import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -33,12 +31,21 @@ import { MaterialModule } from './material/material.module';
     ConsultaClienteComponent,
     AutocadastroComponent,
     ListarClientesComponent,
-    DynamicTableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     provideAnimationsAsync()
