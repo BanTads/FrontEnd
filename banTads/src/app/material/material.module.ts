@@ -20,6 +20,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatDialog} from "@angular/material/dialog";
 
 
 const MY_DATE_FORMAT = {
@@ -58,7 +59,8 @@ const MY_DATE_FORMAT = {
     MatDatepickerModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
   ],
   exports: [
     ReactiveFormsModule,
@@ -80,7 +82,7 @@ const MY_DATE_FORMAT = {
     MatList,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ]
 })
 export class MaterialModule {

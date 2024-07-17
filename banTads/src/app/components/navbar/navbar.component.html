@@ -7,6 +7,8 @@
 	<a routerLink="/dashboard" href="#" class="list-group-item list-group-item-action">
 		<mat-icon>home</mat-icon><span> Página Inicial</span>
 	</a>
+
+
 	<ng-container *ngIf="checkRole('ADMIN')">
 		<a routerLink="/relatorio-de-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>assessment</mat-icon><span> Relatório de Clientes</span>
@@ -15,6 +17,8 @@
 			<mat-icon>people</mat-icon><span> Gestão de Gerentes</span>
 		</a>
 	</ng-container>
+
+
 
 	<ng-container *ngIf="checkRole('GERENTE')">
 		<a routerLink="/clientes/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -27,6 +31,8 @@
 			<mat-icon>star</mat-icon><span> Melhores Clientes</span>
 		</a>
 	</ng-container>
+
+
 
 	<ng-container *ngIf="checkRole('CLIENTE')">
 		<a routerLink="/cliente/depositos" href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -42,6 +48,8 @@
 			<mat-icon>receipt</mat-icon><span> Extrato</span>
 		</a>
 	</ng-container>
+
+
 	<!-- ADICIONAR .ID NO FINAL DE USUARIO LOGADO -->
 	<a [routerLink]="'/meu-perfil/' + usuarioLogado" href="#"
 		class="list-group-item list-group-item-action py-2 ripple">

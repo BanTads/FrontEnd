@@ -3,10 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
+import {LoginComponent} from "./pages/login/login/login.component";
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
-  // { path: 'autenticacao', component: LoginComponent },
+  {
+    path:'login',
+    component: LoginComponent,
+
+  },
   {
     path: '',
     component: MainComponent,
