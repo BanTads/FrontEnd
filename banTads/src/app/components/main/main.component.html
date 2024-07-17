@@ -7,21 +7,19 @@
     <app-navbar></app-navbar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button
-      type="button"
-      aria-label="Toggle sidenav"
-      mat-icon-button
-      (click)="drawer.toggle()">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
-    <!-- <mat-toolbar color="primary">
-      @if (isHandset$ | async) {
-      }
-      <span>{{title}}</span>
-    </mat-toolbar> -->
-      <h1 class="mat-h1">{{title}}</h1>
-      <hr>
-
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="profile-box">
+        <app-user-details class="meu-perfil"></app-user-details>
+      </div>
+    </mat-toolbar>
+      <h1 class="mat-h1">Título</h1>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -28,3 +28,10 @@ opacity: 0.5;
 margin: 20px;
 
 }
+
+.profile-box{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+}

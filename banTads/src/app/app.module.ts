@@ -21,6 +21,17 @@ import { SelfRegisterComponent } from './pages/login/self-register/self-register
 import {MatFormField} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "./material/material.module";
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { ClienteComponent } from './pages/cliente/cliente.component';
+import { SquareCardComponent } from './components/cards/square-card/square-card.component';
+import { SquareButtonComponent } from './components/buttons/square-button/square-button.component';
+import { RectangularCardComponent } from './components/cards/rectangular-card/rectangular-card.component';
+import { TableCardComponent } from './components/cards/table-card/table-card.component';
+import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { GerenteComponent } from './pages/gerente/gerente.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
+import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +44,17 @@ import {MaterialModule} from "./material/material.module";
     ListarClientesComponent,
     LoginComponent,
     SelfRegisterComponent,
+    UserDetailsComponent,
+    ClienteComponent,
+    SquareCardComponent,
+    SquareButtonComponent,
+    RectangularCardComponent,
+    TableCardComponent,
+    EditarPerfilComponent,
+    GerenteComponent,
+    AdminComponent,
+    ListarClienteComponent,
+    ConsultarClienteComponent
   ],
   imports: [
     BrowserModule,

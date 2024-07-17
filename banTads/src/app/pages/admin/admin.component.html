@@ -1,0 +1,18 @@
+<div class="let-of-cards">
+  <mat-form-field>
+    <mat-label>Pesquisar</mat-label>
+    <input matInput #input (keyup)="applyFilter($event)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <ng-container>
+    <ng-container *ngIf="usuarios.length > 0">
+      <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
+                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Clientes'" [secondValue]="'45'" [thirdLabel]="'Saldo de Pontos'" [thirdValue]="'+158000  -45000'"
+                            [nameButtonRect]="buttonOne" [showSecondButton]="false" (clickButtonRect)="openDialog(usuario)">
+      </app-rectangular-card>
+    </ng-container>
+  </ng-container>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="usuarios.length || 0"></mat-paginator>
+</div>
