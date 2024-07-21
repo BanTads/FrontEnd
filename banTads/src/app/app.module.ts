@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './components/main/main.component';
@@ -14,7 +15,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
-import { AutocadastroComponent } from './pages/autocadastro/autocadastro.component';
 import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SelfRegisterComponent } from './pages/login/self-register/self-register.component';
@@ -32,6 +32,9 @@ import { GerenteComponent } from './pages/gerente/gerente.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
 import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,6 @@ import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/con
     MainComponent,
     NavbarComponent,
     ConsultaClienteComponent,
-    AutocadastroComponent,
     ListarClientesComponent,
     LoginComponent,
     SelfRegisterComponent,
@@ -58,6 +60,7 @@ import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/con
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -67,7 +70,10 @@ import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/con
     MatSortModule,
     MatFormField,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    // CommonModule,
+    // BrowserAnimationsModule,
+    // ToastrModule
   ],
   providers: [
     provideAnimationsAsync()

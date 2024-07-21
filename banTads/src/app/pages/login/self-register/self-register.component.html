@@ -4,87 +4,78 @@
     <!-- Nome -->
     <mat-form-field class="full-input-field">
       <mat-label>Nome</mat-label>
-      <input matInput type="text" name="nome" placeholder="Nome Completo"
-             required minlength="2">
-      <mat-error *ngIf="formCliente.controls['nome']?.errors?.['required'] && formCliente.controls['nome']?.touched">
-        Digite o nome completo!
-      </mat-error>
-      <mat-error *ngIf="formCliente.controls['nome']?.errors?.['minlength'] && formCliente.controls['nome']?.touched">
-        O nome deve conter ao menos 2 caracteres!
-      </mat-error>
+      <input matInput type="text" name="nome" placeholder="Nome Completo" required minlength="2" [(ngModel)]="formData.nome">
     </mat-form-field>
 
     <!-- Email -->
     <mat-form-field class="full-input-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email"  name="email">
-<!--      <mat-error *ngIf="email.errors?.['required'] && email.touched">-->
-<!--        Digite o email do aluno.-->
-<!--      </mat-error>-->
-<!--      <mat-error *ngIf="email.errors?.['minlength'] && email.touched">-->
-<!--        O email deve conter pelo menos 2 caracteres.-->
-<!--      </mat-error>-->
-<!--      <mat-error *ngIf="email.errors?.['email'] && email.touched">-->
-<!--        Digite um email válido.-->
-<!--      </mat-error>-->
-<!--      <mat-error *ngIf="email.errors?.['pattern'] && email.touched">-->
-<!--        O email deve pertencer ao domínio "ufpr.br".-->
-<!--      </mat-error>-->
+      <input matInput type="email" name="email" [(ngModel)]="formData.email">
     </mat-form-field>
 
     <!-- Celular -->
     <mat-form-field class="full-input-field">
       <mat-label>Celular</mat-label>
-      <input matInput type="text" name="telefone" required placeholder="ex. (41)99999-9999"
-             mask="(00)00000-0000">
-<!--      <mat-error *ngIf="telefoneField.errors?.['required'] && telefoneField.touched">-->
-<!--        Digite o número do celular.-->
-<!--      </mat-error>-->
-<!--      <mat-error *ngIf="telefoneField.errors?.['minlength'] && telefoneField.touched">-->
-<!--        O número do celular deve conter 11 dígitos.-->
-<!--      </mat-error>-->
+      <input matInput type="text" name="telefone" required placeholder="ex. (41)99999-9999" [(ngModel)]="formData.telefone">
     </mat-form-field>
 
-    <mat-form-field class="full-input-field">
+    <mat-form-field class="half-input-field">
       <mat-label>CPF</mat-label>
-      <input matInput type="text" name="cpf" required
-             mask="000.000.000-00">
+      <input matInput type="text" name="cpf" required [(ngModel)]="formData.cpf">
     </mat-form-field>
-
 
     <!-- Salário -->
-    <mat-form-field class="full-input-field">
+    <mat-form-field class="half-input-field right-input-field">
       <mat-label>Salário</mat-label>
-      <input matInput type="text" name="salario" required
-             mask="R$ 0000,00">
+      <input matInput type="number" name="salario" required [(ngModel)]="formData.salario">
+    </mat-form-field>
+
+    <!-- Endereço -->
+    <mat-form-field class="small-input-field">
+      <mat-label>Tipo</mat-label>
+      <mat-select name="tipo" [(ngModel)]="formData.tipo">
+        <mat-option *ngFor="let t of tipo" [value]="t">
+          {{t}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="two-thirds-input-field">
+      <mat-label>Logradouro</mat-label>
+      <input matInput type="text" name="logradouro" required [(ngModel)]="formData.logradouro">
+    </mat-form-field>
+
+    <mat-form-field class="third-input-field">
+      <mat-label>Número</mat-label>
+      <input matInput type="text" name="numero" required [(ngModel)]="formData.numero">
+    </mat-form-field>
+
+    <mat-form-field class="third-input-field right-input-field">
+      <mat-label>Complemento</mat-label>
+      <input matInput type="text" name="complemento" [(ngModel)]="formData.complemento">
+    </mat-form-field>
+
+    <mat-form-field class="third-input-field right-input-field">
+      <mat-label>CEP</mat-label>
+      <input matInput type="text" name="cep" required [(ngModel)]="formData.cep">
+    </mat-form-field>
+
+    <mat-form-field class="two-thirds-input-field">
+      <mat-label>Cidade</mat-label>
+      <input matInput type="text" name="cidade" required [(ngModel)]="formData.cidade">
     </mat-form-field>
 
 
-    <!-- Senha -->
-    <mat-form-field class="full-input-field">
-      <mat-label>Senha</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="senha" name="senha" required minlength="8" (input)="verificarSenha()">
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="!senhaValida && senha !== '' && confirmarSenha !== ''">
-        • Deve conter pelo menos 8 caracteres. <br>
-        • Deve conter pelo menos um caractere especial (!#$%^&*()]).<br>
-        • Deve conter pelo menos um caractere numérico. <br>
-        • Deve conter pelo menos uma letra maiúscula. <br>
-        • Deve conter pelo menos uma letra minúscula. <br>
-      </mat-error>
-    </mat-form-field>
 
-    <!-- Confirmação de Senha -->
-    <mat-form-field class="full-input-field">
-      <mat-label>Confirme sua senha</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="confirmarSenha" name="confirmarSenha" required
-             minlength="8" (input)="verificarSenha()">
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="!senhaValida">
-        As senhas não correspondem.
-      </mat-error>
-    </mat-form-field>
 
+    <mat-form-field class="small-input-field right-input-field">
+      <mat-label>Estado</mat-label>
+      <mat-select name="uf" [(ngModel)]="formData.uf">
+        <mat-option *ngFor="let e of estado" [value]="e">
+          {{e}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 
