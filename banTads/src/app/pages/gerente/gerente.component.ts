@@ -14,11 +14,7 @@ import {Observable} from "rxjs";
 export class GerenteComponent implements OnInit{
   inputValue: string = '';
   //usuarioLogado: Usuario = new Usuario();
-  usuarios: Usuario[] = [
-    new Usuario(1,'usuario 1','usuario1@email.com'),
-    new Usuario(2,'usuario 2','usuario2@email.com'),
-    new Usuario(3,'usuario 3','usuario3@email.com'),
-  ];
+  usuarios: Usuario[] = [];
   buttonOne: string = "Aprovar";
   firstButtonColor: string = "btn-green";
   buttonTwo: string = "Recusar";
