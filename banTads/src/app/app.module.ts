@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './components/main/main.component';
@@ -33,8 +32,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
 import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -71,12 +70,14 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormField,
     FormsModule,
     MaterialModule,
-    // CommonModule,
-    // BrowserAnimationsModule,
-    // ToastrModule
+    ToastrModule.forRoot(),
+    CommonModule,
+    BrowserAnimationsModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideAnimations(), 
+    provideToastr(),
   ],
   bootstrap: [AppComponent]
 })
