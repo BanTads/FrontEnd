@@ -5,33 +5,36 @@
             <mat-form-field>
                 <input matInput placeholder="Valor do depósito" type="number" [(ngModel)]="valor" name="valor">
             </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Número da conta corrente destino" type="number"
-                    name="numeroContaCorrenteDestino" [(ngModel)]="numeroContaCorrenteDestino">
-            </mat-form-field>
         </ng-container>
         <ng-container *ngIf="tipoMovimentacao === 1">
+            <div class="saldo">
+                <p>Saldo da conta corrente + limite disponível:</p>
+                <p>R$ {{saldoContaCorrente}}</p>
+            </div>
             <mat-form-field>
                 <input matInput placeholder="Valor do saque" type="number" [(ngModel)]="valor" name="valor">
             </mat-form-field>
         </ng-container>
         <ng-container *ngIf="tipoMovimentacao === 2">
-            
-            <p>Saldo da conta corrente + limite disponível: R$ {{saldoContaCorrente}}</p>
-
+            <div class="saldo">
+                <p>Saldo da conta corrente + limite disponível: R$ </p>
+                <p>{{saldoContaCorrente}}</p>
+            </div>
             <mat-form-field>
                 <input matInput placeholder="Valor da transferência" type="number" [(ngModel)]="valor" name="valor">
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Número da conta corrente destino" type="number"
-                name="numeroContaCorrenteDestino" [(ngModel)]="numeroContaCorrenteDestino">
+                    name="numeroContaCorrenteDestino" [(ngModel)]="numeroContaCorrenteDestino">
             </mat-form-field>
         </ng-container>
     </div>
     <div class="btns">
-    <button *ngIf="tipoMovimentacao === 0" mat-raised-button color="primary" (click)="sacar()">Sacar</button>
-    <button *ngIf="tipoMovimentacao === 1" mat-raised-button color="primary" (click)="depositar()">Depositar</button>
-    <button *ngIf="tipoMovimentacao === 2" mat-raised-button color="primary" (click)="transferir()">Transferir</button>
-    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
-</div>
+        <button *ngIf="tipoMovimentacao === 0" mat-raised-button color="primary"
+            (click)="depositar()">Depositar</button>
+        <button *ngIf="tipoMovimentacao === 1" mat-raised-button color="primary" (click)="sacar()">Sacar</button>
+        <button *ngIf="tipoMovimentacao === 2" mat-raised-button color="primary"
+            (click)="transferir()">Transferir</button>
+        <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    </div>
 </form>
