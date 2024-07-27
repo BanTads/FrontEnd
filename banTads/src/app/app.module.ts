@@ -34,6 +34,9 @@ import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/con
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
+  import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
+import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { provideToastr, ToastrModule } from 'ngx-toastr';
     GerenteComponent,
     AdminComponent,
     ListarClienteComponent,
-    ConsultarClienteComponent
+    ConsultarClienteComponent,
+    ExtratoComponent,
+    DepositoComponent,
+    MovimentacaoComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   exibir: boolean = true;
-  userRole: string = 'GERENTE'; // Altere para o perfil do usuário logado:
+  userRole: string = 'CLIENTE'; // Altere para o perfil do usuário logado:
   // 'CLIENTE' | 'GERENTE' | 'ADMIN' ;
 
   //ALTERAR PRA CRIAR UM USER DO TIPO USER
