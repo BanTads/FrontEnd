@@ -9,10 +9,12 @@ import {EditarPerfilComponent} from "./pages/editar-perfil/editar-perfil.compone
 import {GerenteComponent} from "./pages/gerente/gerente.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {SaqueComponent} from "./pages/cliente/saque/saque.component";
-import {DepositarComponent} from "./pages/cliente/depositar/depositar.component";
 import {TransferenciaComponent} from "./pages/cliente/transferencia/transferencia.component";
 import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
 import {ConsultarClienteComponent} from "./pages/gerente/consultar-cliente/consultar-cliente.component";
+import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
+import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
+import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -41,19 +43,29 @@ const routes: Routes = [
         title: 'Editar Perfil'
       },
       {
-        path: 'cliente/saque',
-        component: SaqueComponent,
-        title: 'Saque'
+        path: 'cliente/deposito',
+        component: DepositoComponent,
+        title: 'Depósito',
       },
       {
-        path: 'cliente/deposito',
-        component: DepositarComponent,
-        title: 'Depositar'
+        path: 'cliente/saque',
+        component: SaqueComponent,
+        title: 'Saque',
+      },
+      {
+        path: 'movimentacao',
+        component: MovimentacaoComponent,
+        
       },
       {
         path: 'cliente/transferencia',
         component: TransferenciaComponent,
-        title: 'Transferência'
+        title: 'Transferência',
+      },
+      {
+        path: 'cliente/extrato',
+        component: ExtratoComponent,
+        title: 'Consulta Extrato'
       },
       {
         path: "gerente",
@@ -104,9 +116,6 @@ const routes: Routes = [
       //   path: 'cliente/transferencias'
       // },
 
-      // {
-      //   path: 'cliente/extratos'
-      // },
       // {
       //   path: '/meu-perfil/:id'
       // },

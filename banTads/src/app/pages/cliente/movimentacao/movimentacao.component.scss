@@ -1,0 +1,30 @@
+form .form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 30px;
+}
+
+.btns{
+    display: flex;
+    margin-left: 30px;
+    button{
+        margin-right: 10px;
+
+}
+}
+
+.saldo{
+    margin-bottom: 15px;
+    background-color: gray;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-top: 10px;
+    color: white;
+    justify-content: space-between;
+    :nth-child(1){
+     
+    
+        font-weight: bold;
+    }
+}
