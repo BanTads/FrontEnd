@@ -5,6 +5,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { HttpClient } from '@angular/common/http';
+import {MatDialog} from "@angular/material/dialog";
+import {MotivoRecusaComponent} from "./motivo-recusa/motivo-recusa.component";
 
 @Component({
   selector: 'app-gerente',
@@ -22,7 +24,8 @@ export class GerenteComponent implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    public dialog: MatDialog
   ) { }
 
   @ViewChild('table') table: any;
@@ -52,7 +55,14 @@ export class GerenteComponent implements OnInit {
   }
 
   openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
+    const dialogRef = this.dialog.open(MotivoRecusaComponent, {
+      width: '30rem',
+      height: '20rem'
+    });
+    dialogRef.componentInstance.recusarMotivo.subscribe((motivo: string) => {
+      console.log("entrou no subscribe ",motivo);
+      this.recusarUsuario(usuario, motivo);
+    });
   }
 
   loadUsuariosPendentes(): void {
@@ -69,7 +79,7 @@ export class GerenteComponent implements OnInit {
   }
 
   aprovarUsuario(usuario: Usuario) {
-    const url = 'localhost:8083/api/conta/atualizar/' + usuario.conta?.numeroConta;
+    const url = 'http://localhost:8083/api/conta/atualizar/' + usuario.conta?.numeroConta;
     const body = {
       numeroConta: usuario.conta?.numeroConta,
       aprovada: true,
@@ -80,25 +90,19 @@ export class GerenteComponent implements OnInit {
       idGerente: usuario.conta?.idGerente
     };
 
-    console.log(body);
-
     this.http.put(url, body).subscribe({
       next: (response) => {
-        console.log('Usuário aprovado com sucesso', response)
+        console.log('Usuário aprovado com sucesso', response);
+        this.removerUsuarioDaLista(usuario);
       },
       error: (error) => {
         console.error('Erro ao aprovar usuário', error);
       }
-    }
-
-  );
-    console.log("fez o put");
+    });
   }
 
   recusarUsuario(usuario: Usuario, motivo: string) {
-    console.log('Segundo botão clicado', usuario);
-
-    const url = 'localhost:8083/api/conta/atualizar/' + usuario.conta?.numeroConta;
+    const url = 'http://localhost:8083/api/conta/atualizar/' + usuario.conta?.numeroConta;
     const body = {
       numeroConta: usuario.conta?.numeroConta,
       aprovada: false,
@@ -109,15 +113,20 @@ export class GerenteComponent implements OnInit {
       idGerente: usuario.conta?.idGerente
     };
 
-
     this.http.put(url, body).subscribe({
-        next: (response) => {
-          console.log('Usuário recusado com sucesso', response);
-        },
-        error: (error) => {
-          console.error('Erro ao recusar usuário', error);
-        }
+      next: (response) => {
+        console.log('Usuário recusado com sucesso', response);
+        this.removerUsuarioDaLista(usuario);
+      },
+      error: (error) => {
+        console.error('Erro ao recusar usuário', error);
       }
-    );
+    });
+  }
+
+  private removerUsuarioDaLista(usuario: Usuario) {
+    this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+    this.dataSource.data = this.usuarios;
+    this.cdr.detectChanges();
   }
 }

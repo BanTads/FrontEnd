@@ -37,6 +37,7 @@ import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
   import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
 import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
+import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao
     ConsultarClienteComponent,
     ExtratoComponent,
     DepositoComponent,
-    MovimentacaoComponent
+    MovimentacaoComponent,
+    MotivoRecusaComponent
   ],
   imports: [
     BrowserModule,
