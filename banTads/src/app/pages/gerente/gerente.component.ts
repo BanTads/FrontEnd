@@ -61,7 +61,7 @@ export class GerenteComponent implements OnInit{
   }
 
   loadUsuariosPendentes(): void {
-    this.http.get<Usuario[]>('http://localhost:8011/api/gerente/pendente-aprovacao/1').subscribe({
+    this.http.get<Usuario[]>('http://localhost:8084/api/gerente/pendente-aprovacao/1').subscribe({
       next: (data) => {
         console.log(data);
         this.usuarios = data;
