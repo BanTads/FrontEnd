@@ -1,3 +1,5 @@
+import {Conta} from "./conta.model";
+
 export class Usuario {
   public id!: number;
   public nome: string = "";
@@ -6,6 +8,8 @@ export class Usuario {
   public telefone: string = "";
   public senha: string = "";
   public papel: string = "";
+  public salario: number = 0;
+  public conta: Conta | null = null;
 
   constructor(
     id?: number,
@@ -14,7 +18,9 @@ export class Usuario {
     cpf?: string,
     telefone?: string,
     senha?: string,
-    papel?: string) {
+    papel?: string,
+    salario?: number,
+    conta?: Conta) {
     if(id) this.id = id;
     if(nome) this.nome = nome;
     if(email) this.email = email;
@@ -22,5 +28,7 @@ export class Usuario {
     if(telefone) this.telefone = telefone;
     if(senha) this.senha = senha;
     if(papel) this.papel = papel;
+    if(salario) this.salario = salario
+    if(conta) this.conta = conta;
   }
 }

@@ -8,8 +8,8 @@
   <ng-container>
     <ng-container *ngIf="usuarios.length > 0">
       <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
-                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Salário'" [secondValue]="usuario.email"
-                            [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="openDialog(usuario)">
+                            [firstLabel]="'CPF'" [firstValue]="usuario.cpf" [secondLabel]="'Salário'" [secondValue]="'R$ '+ usuario.salario.toString()"
+                            [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="aprovarUsuario(usuario)" (clickSecondButtonRect)="recusarUsuario(usuario, 'salario baixo')">
       </app-rectangular-card>
     </ng-container>
   </ng-container>
