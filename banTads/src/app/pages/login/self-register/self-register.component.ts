@@ -73,7 +73,7 @@ export class SelfRegisterComponent {
       }
     };
 
-    this.http.post('http://localhost:8009/api/autocadastro', requestBody).subscribe({
+    this.http.post('http://localhost:8082/api/autocadastro', requestBody).subscribe({
       next: (response) => console.log('Cadastro realizado com sucesso!', response),
       error: (error) => console.error('Erro ao realizar cadastro:', error)
     });
