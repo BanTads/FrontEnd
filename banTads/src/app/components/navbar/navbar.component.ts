@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,32 +10,24 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   exibir: boolean = true;
-  userRole: string = 'CLIENTE'; // Altere para o perfil do usuário logado:
-  // 'CLIENTE' | 'GERENTE' | 'ADMIN' ;
-
-  //ALTERAR PRA CRIAR UM USER DO TIPO USER
-usuarioLogado: number = 1;
+  userRole!: string;
+  usuarioLogado: number = 1;
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
+    private loginService: LoginService
   ) { }
 
-
-
   ngOnInit(): void {
-
-  }
-
-  openDialog(){
-
+    this.userRole = this.loginService.usuarioLogado!.cargo
   }
 
   checkRole(role: string): boolean {
     return this.userRole === role;
   }
   logout() {
-    //this.loginService.logout();
-    this.router.navigate(["login"]);
+    this.loginService.logout();
+    this.router.navigate(["/login"]);
   }
 }

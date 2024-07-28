@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './components/main/main.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,9 +16,9 @@ import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cl
 import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SelfRegisterComponent } from './pages/login/self-register/self-register.component';
-import {MatFormField} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
-import {MaterialModule} from "./material/material.module";
+import { MatFormField } from "@angular/material/form-field";
+import { FormsModule } from "@angular/forms";
+import { MaterialModule } from "./material/material.module";
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { SquareCardComponent } from './components/cards/square-card/square-card.component';
@@ -29,19 +28,19 @@ import { TableCardComponent } from './components/cards/table-card/table-card.com
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
 import { GerenteComponent } from './pages/gerente/gerente.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
+import { ListarClienteComponent } from "./pages/gerente/listar-cliente/listar-cliente.component";
 import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
-  import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
+import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
 import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
-
+import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from './services/login.service';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     MainComponent,
     NavbarComponent,
     ConsultaClienteComponent,
@@ -81,8 +80,9 @@ import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao
     BrowserAnimationsModule,
   ],
   providers: [
+    LoginService, CookieService,
     provideAnimationsAsync(),
-    provideAnimations(), 
+    provideAnimations(),
     provideToastr(),
   ],
   bootstrap: [AppComponent]
