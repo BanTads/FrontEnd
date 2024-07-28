@@ -1,0 +1,13 @@
+<h2 class="dialog-title">Por que esse cliente foi recusado?</h2>
+<mat-dialog-content class="dialog-container">
+  <form #ngForm="ngForm" class="dialog-content">
+    <mat-form-field class="full-input-field">
+      <mat-label>Motivo</mat-label>
+      <input matInput type="text" name="motivo" placeholder="Motivo da recusa" required minlength="2" [(ngModel)]="formData.motivo">
+    </mat-form-field>
+    <div class="dialog-actions">
+      <button mat-raised-button mat-dialog-close color="error" [mat-dialog-close]="true">Cancelar</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="true" cdkFocusInitial [disabled]="!ngForm.valid" (click)="recusar(ngForm)">Recusar</button>
+    </div>
+  </form>
+</mat-dialog-content>

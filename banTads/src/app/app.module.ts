@@ -38,6 +38,8 @@ import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
 import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './services/login.service';
+import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,8 @@ import { LoginService } from './services/login.service';
     ConsultarClienteComponent,
     ExtratoComponent,
     DepositoComponent,
-    MovimentacaoComponent
+    MovimentacaoComponent,
+    MotivoRecusaComponent
   ],
   imports: [
     BrowserModule,
