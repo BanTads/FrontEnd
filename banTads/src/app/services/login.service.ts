@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Usuario} from "../models/Usuario.model";
+import { Usuario} from "../models/usuario.model";
 import { Login} from "../models/login.model";
 import { ApiResponseLogin } from "../interfaces/api-response-login";
 import { CookieService } from 'ngx-cookie-service';
@@ -19,7 +19,7 @@ export class LoginService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }; 
+  };
 
   private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
   public usuarioLogado$ = this.usuarioLogadoSubject.asObservable();

@@ -1,72 +1,37 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Usuario} from "../../models/Usuario.model";
-import {Router} from "@angular/router";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Observable} from "rxjs";
+import { ChangeDetectorRef, Component, ViewChild, OnInit } from '@angular/core';
+import { Gerente} from "../../models/gerente.model";
+import { Router } from "@angular/router";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   inputValue: string = '';
-  //usuarioLogado: Usuario = new Usuario();
-  usuarios: Usuario[] = [
-    new Usuario(1,'gerente 1','usuario1@email.com'),
-    new Usuario(2,'Gerente 2','usuario2@email.com'),
-    new Usuario(3,'Gerente 3','usuario3@email.com'),
-  ];
+  gerentes: Gerente[] = [];
   buttonOne: string = "Detalhes";
 
-
-
-
   constructor(
-    // private title: TitleService,
-    // private userService: UsuarioService,
     private cdr: ChangeDetectorRef,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
-    // public loginService: LoginService
+    private http: HttpClient
   ) { }
+
   ngOnInit(): void {
-    // this.title.setTitle('Listar Usuários');
-    // this.usuarioLogado = this.loginService.usuarioLogado
-    // if (!this.usuarioLogado) {
-    //   this.router.navigate(['login']);
-    // } else {
-    //   // this.instanciarUsuarios();
-    // }
-
+    this.getGerentes();
   }
-  @ViewChild('table') table: any;
 
+  @ViewChild('table') table: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource!: MatTableDataSource<Usuario>;
-  obs!: Observable<Usuario[]>;
-  // instanciarUsuarios() {
-  //   this.userService.listarTodosUsuarios().subscribe(
-  //     (usuarios) => {
-  //       this.usuarios = usuarios;
-  //       this.dataSource = new MatTableDataSource(this.usuarios);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.cdr.detectChanges();
-  //       this.obs = this.dataSource.connect();
-  //       this.toastr.success('Usuários listados com sucesso!');
-  //     },
-  //     (error) => {
-  //       this.toastr.error('Erro ao listar usuários!');
-  //     }
-  //   );
-  //   if (this.table) {
-  //     this.dataSource = new MatTableDataSource<Usuario>(this.usuarios);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.cdr.detectChanges();
-  //     this.obs = this.dataSource.connect();
-  //   }
-  // }
+  dataSource!: MatTableDataSource<Gerente>;
+  obs!: Observable<Gerente[]>;
 
   ngOnDestroy() {
     if (this.dataSource) {
@@ -84,8 +49,28 @@ export class AdminComponent {
       }
     }
   }
-  openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
-  }
 
+  getGerentes() {
+    this.http.get<any>('http://localhost:8084/api/gerente/admin/dashboard').subscribe(response => {
+      if (response.success) {
+        console.log(response.data);
+        this.gerentes = response.data.map((item: any) => new Gerente(
+          item.numeroClientes,
+          item.saldoPositivoTotal,
+          item.saldoNegativoTotal,
+          item.id,
+          item.nome,
+          item.email,
+          item.cargo
+        ));
+        this.dataSource = new MatTableDataSource(this.gerentes);
+        this.dataSource.paginator = this.paginator;
+        this.obs = this.dataSource.connect();
+      } else {
+        this.toastr.error(response.message);
+      }
+    }, error => {
+      this.toastr.error('Erro ao buscar gerentes');
+    });
+  }
 }

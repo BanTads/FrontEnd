@@ -12,8 +12,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
-import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SelfRegisterComponent } from './pages/login/self-register/self-register.component';
 import { MatFormField } from "@angular/material/form-field";
@@ -45,8 +43,6 @@ import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recu
     AppComponent,
     MainComponent,
     NavbarComponent,
-    ConsultaClienteComponent,
-    ListarClientesComponent,
     LoginComponent,
     SelfRegisterComponent,
     UserDetailsComponent,
