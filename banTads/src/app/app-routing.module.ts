@@ -1,127 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
-import {LoginComponent} from "./pages/login/login/login.component";
-import {ClienteComponent} from "./pages/cliente/cliente.component";
-import {EditarPerfilComponent} from "./pages/editar-perfil/editar-perfil.component";
-import {GerenteComponent} from "./pages/gerente/gerente.component";
-import {AdminComponent} from "./pages/admin/admin.component";
-import {SaqueComponent} from "./pages/cliente/saque/saque.component";
-import {TransferenciaComponent} from "./pages/cliente/transferencia/transferencia.component";
-import {ListarClienteComponent} from "./pages/gerente/listar-cliente/listar-cliente.component";
-import {ConsultarClienteComponent} from "./pages/gerente/consultar-cliente/consultar-cliente.component";
-import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
-import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
-import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
+import { ClienteRoutes } from './pages/cliente/cliente-routing.module';
+import { LoginRoutes } from './pages/login/login/login-routing.module';
+import { GerenteRoutes } from './pages/gerente/gerente-routing.module';
+import { AdminRoutes } from './pages/admin/admin-routing.module';
+import { MainRoute } from './components/main/main-routing.module';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
-  {
-    path:'login',
-    component: LoginComponent,
-
-  },
-  {
-    path: '',
-    component: MainComponent,
-    children: [
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        title: 'Pagina Inicial'
-      },
-      {
-        path: 'cliente',
-        component: ClienteComponent,
-        title: 'Página Inicial'
-      },
-      {
-        path: 'cliente/editar', //TODO adicionar id /:id
-        component: EditarPerfilComponent,
-        title: 'Editar Perfil'
-      },
-      {
-        path: 'cliente/deposito',
-        component: DepositoComponent,
-        title: 'Depósito',
-      },
-      {
-        path: 'cliente/saque',
-        component: SaqueComponent,
-        title: 'Saque',
-      },
-      {
-        path: 'movimentacao',
-        component: MovimentacaoComponent,
-        
-      },
-      {
-        path: 'cliente/transferencia',
-        component: TransferenciaComponent,
-        title: 'Transferência',
-      },
-      {
-        path: 'cliente/extrato',
-        component: ExtratoComponent,
-        title: 'Consulta Extrato'
-      },
-      {
-        path: "gerente",
-        component: GerenteComponent,
-        title: 'Página Inicial'
-      },
-      {
-        path:'gerente/listar',
-        component: ListarClienteComponent,
-        title: 'Lista de Clientes'
-      },
-      {
-        path: 'gerente/consultar',
-        component: ConsultarClienteComponent,
-        title: 'Consultar Cliente'
-      },
-      {
-        path: "admin",
-        component: AdminComponent,
-        title: 'Página Inicial'
-      },
-      // {
-      //   path: 'relatorio-de-clientes'
-      // },
-      // {
-      //   path: 'gestao-de-gerentes'
-      // },
-      {
-        path: 'consulta-cliente',
-        component: ConsultaClienteComponent,
-        title: 'Consultar Cliente'
-      },
-      // {
-      //   path: 'melhores-clientes',
-
-      //   title: 'Melhores Clientes'
-      // },
-
-      // {
-      //   path: 'cliente/depositos'
-      // },
-
-      // {
-      //   path: 'cliente/saques'
-      // },
-
-      // {
-      //   path: 'cliente/transferencias'
-      // },
-
-      // {
-      //   path: '/meu-perfil/:id'
-      // },
-
-    ]
-  },
+  
+  ...MainRoute,
+  ...LoginRoutes,
 ];
 
 @NgModule({
