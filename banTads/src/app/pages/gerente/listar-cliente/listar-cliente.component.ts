@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Usuario} from "../../../models/Usuario.model";
+import {Usuario} from "../../../models/usuario.model";
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
@@ -14,9 +14,9 @@ export class ListarClienteComponent {
   inputValue: string = '';
   //usuarioLogado: Usuario = new Usuario();
   usuarios: Usuario[] = [
-    new Usuario(1,'usuario 1','usuario1@email.com'),
-    new Usuario(2,'usuario 2','usuario2@email.com'),
-    new Usuario(3,'usuario 3','usuario3@email.com'),
+    new Usuario("1",'usuario 1','usuario1@email.com'),
+    new Usuario("2",'usuario 2','usuario2@email.com'),
+    new Usuario("3",'usuario 3','usuario3@email.com'),
   ];
   buttonOne: string = "Aprovar";
   firstButtonColor: string = "btn-green";
