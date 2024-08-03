@@ -1,9 +1,17 @@
 <div class="data">
   <app-square-card></app-square-card>
   <div class="button-group">
-    <app-square-button [buttonType]="'saque'"></app-square-button>
-    <app-square-button [buttonType]="'deposito'"></app-square-button>
-    <app-square-button [buttonType]="'transferencia'"></app-square-button>
+    <button class="deposito" mat-fab extended (click)="movimentar(0)">
+      <mat-icon>add</mat-icon>
+      Depósito
+    </button>
+    <button class="saque" mat-fab extended (click)="movimentar(1)">
+      <mat-icon>arrow_upward</mat-icon>
+      Saque
+    </button>
+    <button class="transferencia" mat-fab extended (click)="movimentar(2)">
+      <mat-icon>sync_alt</mat-icon>
+      Transferência
+    </button>
   </div>
-
 </div>
