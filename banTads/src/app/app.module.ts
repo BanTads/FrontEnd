@@ -79,7 +79,8 @@ import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recu
     BrowserAnimationsModule,
   ],
   providers: [
-    LoginService, CookieService,
+    LoginService,
+    CookieService,
     provideAnimationsAsync(),
     provideAnimations(),
     provideToastr(),
