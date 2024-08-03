@@ -56,6 +56,7 @@ export class LoginService {
     this.cookieService.delete(COOKIE_USUARIO);
     this.cookieService.delete(COOKIE_TOKEN);
     window.location.reload();
+    window.location.href = 'http://localhost:4200';
   }
 
   login(login: Login): Observable<Usuario> {
