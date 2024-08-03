@@ -145,7 +145,7 @@ export class GerenteService {
             limite: cliente.limite,
             idGerente: gerenteId,
             motivo: '',
-            saldo: cliente.saldo
+            saldo: cliente.total,
           },
           cliente.endereco,
           cliente.id,

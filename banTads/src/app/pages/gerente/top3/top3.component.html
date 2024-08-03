@@ -4,7 +4,7 @@
                           [nome]="c.nome ? c.nome.toString() : ''"
                           [firstLabel]="'CPF'" [firstValue]="c.cpf"
                           [secondLabel]="'Cidade'" [secondValue]="c.endereco.cidade +' - '+ c.endereco.uf"
-                          [thirdLabel]="'Saldo'" [thirdValue]="'R$ '+ c.conta.saldo.total.toString()"
+                          [thirdLabel]="'Saldo'" [thirdValue]="'R$ '+ c.conta.saldo"
                           [nameButtonRect]="buttonOne" [showSecondButton]="false"
                           (clickButtonRect)="openDialog(c)">
     </app-rectangular-card>
