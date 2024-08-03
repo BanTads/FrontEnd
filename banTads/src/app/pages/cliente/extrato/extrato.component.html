@@ -1,1 +1,4 @@
-<p>extrato works!</p>
+<app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
+                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Salário'" [secondValue]="'R$ 15000,00'"
+                            [nameButtonRect]="buttonOne" [showSecondButton]="false" (clickButtonRect)="openDialog(usuario)">
+      </app-rectangular-card>

@@ -41,6 +41,7 @@ const MY_DATE_FORMAT = {
   declarations: [],
   imports: [
     CommonModule,
+    MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -66,6 +67,7 @@ const MY_DATE_FORMAT = {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
     MatIconModule,
     BrowserAnimationsModule,

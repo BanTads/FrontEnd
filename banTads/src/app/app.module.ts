@@ -20,7 +20,6 @@ import { MaterialModule } from "./material/material.module";
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { SquareCardComponent } from './components/cards/square-card/square-card.component';
-import { SquareButtonComponent } from './components/buttons/square-button/square-button.component';
 import { RectangularCardComponent } from './components/cards/rectangular-card/rectangular-card.component';
 import { TableCardComponent } from './components/cards/table-card/table-card.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
@@ -32,7 +31,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
-import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
 import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './services/login.service';
@@ -49,7 +47,6 @@ import {Top3Component} from "./pages/gerente/top3/top3.component";
     UserDetailsComponent,
     ClienteComponent,
     SquareCardComponent,
-    SquareButtonComponent,
     RectangularCardComponent,
     TableCardComponent,
     EditarPerfilComponent,
@@ -58,7 +55,6 @@ import {Top3Component} from "./pages/gerente/top3/top3.component";
     ListarClienteComponent,
     ConsultarClienteComponent,
     ExtratoComponent,
-    DepositoComponent,
     MovimentacaoComponent,
     MotivoRecusaComponent,
     Top3Component

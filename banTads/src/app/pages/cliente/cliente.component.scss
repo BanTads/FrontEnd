@@ -1,7 +1,39 @@
 .data {
-  margin-left: 2%;
+  margin-left: 20px;
 }
-.button-group{
+
+.button-group {
   display: flex;
   flex-direction: row;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .button-group .icon {
+    display: block;
+  }
+  
+  .button-group .text {
+    display: none;
+  }
+}
+
+
+.button-group{
+padding-right: 10px;
+  .saque {
+    background-color: #1A5280;
+  }
+  
+.deposito {
+  background-color: #559958;
+}
+
+.transferencia {
+  background-color: #D95409;
+}
 }
