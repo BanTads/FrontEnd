@@ -1,5 +1,6 @@
 import {Conta} from "./conta.model";
 import {Usuario} from "./usuario.model";
+import {Endereco} from "./endereco.model";
 
 export class Cliente extends Usuario{
   constructor(
@@ -8,6 +9,7 @@ export class Cliente extends Usuario{
     public senha: string = "",
     public salario: number = 0,
     public conta: Conta,
+    public endereco: Endereco,
     id?: string,
     nome?: string,
     email?: string,

@@ -4,6 +4,7 @@ import { ListarClienteComponent } from "./listar-cliente/listar-cliente.componen
 import { ConsultarClienteComponent } from "./consultar-cliente/consultar-cliente.component";
 import { AuthGuard } from "../login/auth-guard";
 import { MainComponent } from "../../components/main/main.component";
+import {Top3Component} from "./top3/top3.component";
 
 export const GerenteRoutes: Routes = [
   {
@@ -33,5 +34,12 @@ export const GerenteRoutes: Routes = [
     canActivate: [AuthGuard],
     data: { expectedRole: ['GERENTE'] }
   },
+  {
+    path: "gerente/melhores-clientes",
+    component: Top3Component,
+    title: 'Melhores Clientes',
+    canActivate: [AuthGuard],
+    data: { expectedRole: ['GERENTE'] }
+  }
 
 ]

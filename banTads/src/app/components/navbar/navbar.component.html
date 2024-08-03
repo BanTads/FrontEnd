@@ -21,13 +21,13 @@
 
 
 	<ng-container *ngIf="checkRole('GERENTE')">
-		<a routerLink="/clientes/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>group</mat-icon><span> Clientes</span>
 		</a>
-		<a routerLink="/consulta-cliente" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/consultar" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>description</mat-icon><span> Consulta Cliente</span>
 		</a>
-		<a routerLink="/melhores-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/melhores-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>star</mat-icon><span> Melhores Clientes</span>
 		</a>
 	</ng-container>

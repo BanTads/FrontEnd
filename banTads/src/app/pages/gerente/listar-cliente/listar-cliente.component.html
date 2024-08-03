@@ -1,14 +1,20 @@
 <div class="let-of-cards">
   <mat-form-field>
-    <mat-label>Pesquisar por CPF</mat-label>
+    <mat-label>Pesquisar por CPF ou Nome</mat-label>
     <input matInput #input (keyup)="applyFilter($event)">
-    <mat-icon matSuffix>search</mat-icon>
+    <button mat-icon-button matSuffix (click)="searchCliente(input.value)">
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-form-field>
   <ng-container>
     <ng-container *ngIf="usuarios.length > 0">
-      <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
-                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Salário'" [secondValue]="'R$ 15000,00'"
-                            [nameButtonRect]="buttonOne" [showSecondButton]="false" (clickButtonRect)="openDialog(usuario)">
+      <app-rectangular-card *ngFor="let c of usuarios"
+                            [nome]="c.nome ? c.nome.toString() : ''"
+                            [firstLabel]="'CPF'" [firstValue]="c.cpf"
+                            [secondLabel]="'Cidade'" [secondValue]="c.endereco.cidade +' - '+ c.endereco.uf"
+                            [thirdLabel]="'Saldo'" [thirdValue]="'R$ '+ c.conta.saldo.total.toString()"
+                            [nameButtonRect]="buttonOne" [showSecondButton]="false"
+                            (clickButtonRect)="openDialog(c)">
       </app-rectangular-card>
     </ng-container>
   </ng-container>

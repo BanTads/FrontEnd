@@ -13,7 +13,7 @@ const COOKIE_TOKEN: string = 'x-access-token';
   providedIn: 'root',
 })
 export class LoginService {
-  BASE_URL = "http://localhost:8085";
+  BASE_URL = "http://localhost:3000";
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -55,12 +55,11 @@ export class LoginService {
     this.usuarioLogadoSubject.next(null);
     this.cookieService.delete(COOKIE_USUARIO);
     this.cookieService.delete(COOKIE_TOKEN);
-    this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/logout', {}, this.httpOptions).subscribe();
     window.location.reload();
   }
 
   login(login: Login): Observable<Usuario> {
-    return this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/api/auth/login', JSON.stringify(login), this.httpOptions)
+    return this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/login', JSON.stringify(login), this.httpOptions)
       .pipe(
         map(response => {
           const usuario = response.data;

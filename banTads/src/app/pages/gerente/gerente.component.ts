@@ -4,9 +4,9 @@ import { Router } from "@angular/router";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
-import { HttpClient } from '@angular/common/http';
-import {MatDialog} from "@angular/material/dialog";
-import {MotivoRecusaComponent} from "./motivo-recusa/motivo-recusa.component";
+import { MatDialog } from "@angular/material/dialog";
+import { MotivoRecusaComponent } from "./motivo-recusa/motivo-recusa.component";
+import { GerenteService } from '../../services/gerente.service';
 
 @Component({
   selector: 'app-gerente',
@@ -24,7 +24,7 @@ export class GerenteComponent implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private http: HttpClient,
+    private gerenteService: GerenteService,
     public dialog: MatDialog
   ) { }
 
@@ -60,13 +60,13 @@ export class GerenteComponent implements OnInit {
       height: '20rem'
     });
     dialogRef.componentInstance.recusarMotivo.subscribe((motivo: string) => {
-      console.log("entrou no subscribe ",motivo);
+      console.log("entrou no subscribe ", motivo);
       this.recusarCliente(cliente, motivo);
     });
   }
 
   loadUsuariosPendentes(): void {
-    this.http.get<{ data: Cliente[] }>('http://localhost:8084/api/gerente/pendente-aprovacao/1').subscribe({
+    this.gerenteService.loadUsuariosPendentes().subscribe({
       next: (response) => {
         this.clientes = response.data;
         this.dataSource = new MatTableDataSource(this.clientes);
@@ -79,18 +79,7 @@ export class GerenteComponent implements OnInit {
   }
 
   aprovarCliente(cliente: Cliente) {
-    const url = 'http://localhost:8083/api/conta/atualizar/' + cliente.conta?.numeroConta;
-    const body = {
-      numeroConta: cliente.conta?.numeroConta,
-      aprovada: true,
-      motivo: '',
-      idCliente: cliente.conta?.idCliente,
-      dataCriacao: new Date().toISOString(),
-      limite: cliente.conta?.limite,
-      idGerente: cliente.conta?.idGerente
-    };
-
-    this.http.put(url, body).subscribe({
+    this.gerenteService.aprovarCliente(cliente).subscribe({
       next: (response) => {
         console.log('Usuário aprovado com sucesso', response);
         this.removerUsuarioDaLista(cliente);
@@ -102,18 +91,7 @@ export class GerenteComponent implements OnInit {
   }
 
   recusarCliente(cliente: Cliente, motivo: string) {
-    const url = 'http://localhost:8083/api/conta/atualizar/' + cliente.conta?.numeroConta;
-    const body = {
-      numeroConta: cliente.conta?.numeroConta,
-      aprovada: false,
-      motivo: motivo,
-      idCliente: cliente.conta?.idCliente,
-      dataCriacao: new Date().toISOString(),
-      limite: cliente.conta?.limite,
-      idGerente: cliente.conta?.idGerente
-    };
-
-    this.http.put(url, body).subscribe({
+    this.gerenteService.recusarCliente(cliente, motivo).subscribe({
       next: (response) => {
         console.log('Usuário recusado com sucesso', response);
         this.removerUsuarioDaLista(cliente);

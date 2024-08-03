@@ -6,6 +6,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { HttpClient } from '@angular/common/http';
+import {AdminService} from "../../services/admin.service";
 
 @Component({
   selector: 'app-admin',
@@ -21,7 +22,8 @@ export class AdminComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private adminService: AdminService
   ) { }
 
   ngOnInit(): void {
@@ -51,26 +53,22 @@ export class AdminComponent implements OnInit {
   }
 
   getGerentes() {
-    this.http.get<any>('http://localhost:8084/api/gerente/admin/dashboard').subscribe(response => {
-      if (response.success) {
-        console.log(response.data);
-        this.gerentes = response.data.map((item: any) => new Gerente(
-          item.numeroClientes,
-          item.saldoPositivoTotal,
-          item.saldoNegativoTotal,
-          item.id,
-          item.nome,
-          item.email,
-          item.cargo
-        ));
-        this.dataSource = new MatTableDataSource(this.gerentes);
-        this.dataSource.paginator = this.paginator;
-        this.obs = this.dataSource.connect();
-      } else {
-        this.toastr.error(response.message);
+    this.adminService.getGerentes().subscribe({
+      next: (gerentes: Gerente[]) => {
+        this.gerentes = gerentes;
+        if (this.gerentes.length > 0) {
+          this.dataSource = new MatTableDataSource(this.gerentes);
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
+        } else {
+          this.toastr.error("Nenhum gerente para mostrar!");
+        }
+      },
+      error: (error) => {
+        this.toastr.error("Erro ao buscar gerentes!");
       }
-    }, error => {
-      this.toastr.error('Erro ao buscar gerentes');
     });
   }
-}
+
+
+  }
