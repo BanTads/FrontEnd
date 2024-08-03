@@ -21,7 +21,6 @@ export class ListarClienteComponent implements OnInit {
   secondButtonColor: string = "btn-red";
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
     private router: Router,
     private gerenteService: GerenteService

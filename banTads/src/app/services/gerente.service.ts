@@ -124,5 +124,38 @@ export class GerenteService {
       )))
     );
   }
-  // consultar 3 melhores clientes
+
+  getTop3Clientes(): Observable<Cliente[]> {
+    const cookieValue = this.cookieService.get('usuarioLogado');
+    const gerenteId = JSON.parse(cookieValue).gerente.id;
+    const apiUrl = `${this.BASE_URL}/top3/${gerenteId}`;
+
+    return this.http.get<any>(apiUrl).pipe(
+      map(response => {
+        const clientes = response.data.map((cliente: any) => new Cliente(
+          cliente.cpf,
+          cliente.telefone,
+          '',
+          cliente.salario,
+          {
+            numeroConta: 0,
+            aprovada: true,
+            idCliente: cliente.id,
+            dataCriacao: '',
+            limite: cliente.limite,
+            idGerente: gerenteId,
+            motivo: '',
+            saldo: cliente.saldo
+          },
+          cliente.endereco,
+          cliente.id,
+          cliente.nome,
+          cliente.email,
+        ));
+        console.log(clientes);
+        return clientes;
+      })
+    );
+  }
+
 }
