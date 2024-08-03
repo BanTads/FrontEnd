@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Usuario } from '../../../models/Usuario.model';
+import { Usuario } from '../../../models/usuario.model';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,11 +13,12 @@ import { Router } from '@angular/router';
 export class ExtratoComponent {
   inputValue: string = '';
   //usuarioLogado: Usuario = new Usuario();
-  usuarios: Usuario[] = [
-    new Usuario(1,'Saque','usuario1@email.com'),
-    new Usuario(2,'Depósito','usuario2@email.com'),
-    new Usuario(3,'Transferência','usuario3@email.com'),
-  ];
+  usuarios: Usuario[] = [];
+  // usuarios: Usuario[] = [
+  //   new Usuario(1,'Saque','usuario1@email.com'),
+  //   new Usuario(2,'Depósito','usuario2@email.com'),
+  //   new Usuario(3,'Transferência','usuario3@email.com'),
+  // ];
   buttonOne: string = "Aprovar";
   firstButtonColor: string = "btn-green";
   buttonTwo: string = "Recusar";
@@ -26,10 +27,10 @@ export class ExtratoComponent {
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,
-    
+
   ) { }
   ngOnInit(): void {
- 
+
 
   }
   @ViewChild('table') table: any;
