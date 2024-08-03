@@ -21,13 +21,13 @@
 
 
 	<ng-container *ngIf="checkRole('GERENTE')">
-		<a routerLink="/clientes/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/listar" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>group</mat-icon><span> Clientes</span>
 		</a>
-		<a routerLink="/consulta-cliente" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/consultar" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>description</mat-icon><span> Consulta Cliente</span>
 		</a>
-		<a routerLink="/melhores-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
+		<a routerLink="/gerente/melhores-clientes" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>star</mat-icon><span> Melhores Clientes</span>
 		</a>
 	</ng-container>
@@ -35,15 +35,6 @@
 
 
 	<ng-container *ngIf="checkRole('CLIENTE')">
-		<a routerLink="/cliente/deposito" href="#" class="list-group-item list-group-item-action py-2 ripple">
-			<mat-icon>attach_money</mat-icon><span> Depósito</span>
-		</a>
-		<a routerLink="/cliente/saque" href="#" class="list-group-item list-group-item-action py-2 ripple">
-			<mat-icon>local_atm</mat-icon><span> Saque</span>
-		</a>
-		<a routerLink="/cliente/transferencia" href="#" class="list-group-item list-group-item-action py-2 ripple">
-			<mat-icon>compare_arrows</mat-icon><span> Transferência</span>
-		</a>
 		<a routerLink="/cliente/extrato" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>receipt</mat-icon><span> Extrato</span>
 		</a>

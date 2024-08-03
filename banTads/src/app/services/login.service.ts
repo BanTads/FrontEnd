@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Usuario} from "../models/Usuario.model";
+import { Usuario} from "../models/usuario.model";
 import { Login} from "../models/login.model";
 import { ApiResponseLogin } from "../interfaces/api-response-login";
 import { CookieService } from 'ngx-cookie-service';
@@ -13,13 +13,13 @@ const COOKIE_TOKEN: string = 'x-access-token';
   providedIn: 'root',
 })
 export class LoginService {
-  BASE_URL = "http://localhost:8085";
+  BASE_URL = "http://localhost:3000";
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }; 
+  };
 
   private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
   public usuarioLogado$ = this.usuarioLogadoSubject.asObservable();
@@ -55,12 +55,11 @@ export class LoginService {
     this.usuarioLogadoSubject.next(null);
     this.cookieService.delete(COOKIE_USUARIO);
     this.cookieService.delete(COOKIE_TOKEN);
-    this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/logout', {}, this.httpOptions).subscribe();
     window.location.reload();
   }
 
   login(login: Login): Observable<Usuario> {
-    return this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/api/auth/login', JSON.stringify(login), this.httpOptions)
+    return this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/login', JSON.stringify(login), this.httpOptions)
       .pipe(
         map(response => {
           const usuario = response.data;

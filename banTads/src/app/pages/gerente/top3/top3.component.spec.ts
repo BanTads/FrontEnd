@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DepositoComponent } from './deposito.component';
+import { Top3Component } from './top3.component';
 
-describe('DepositoComponent', () => {
-  let component: DepositoComponent;
-  let fixture: ComponentFixture<DepositoComponent>;
+describe('Top3Component', () => {
+  let component: Top3Component;
+  let fixture: ComponentFixture<Top3Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DepositoComponent]
+      declarations: [Top3Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DepositoComponent);
+    fixture = TestBed.createComponent(Top3Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

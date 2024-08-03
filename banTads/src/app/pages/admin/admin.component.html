@@ -1,18 +1,12 @@
 <div class="let-of-cards">
-  <mat-form-field>
-    <mat-label>Pesquisar</mat-label>
-    <input matInput #input (keyup)="applyFilter($event)">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-
   <ng-container>
-    <ng-container *ngIf="usuarios.length > 0">
-      <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
-                            [firstLabel]="'Nome'" [firstValue]="usuario.nome" [secondLabel]="'Clientes'" [secondValue]="'45'" [thirdLabel]="'Saldo de Pontos'" [thirdValue]="'+158000  -45000'"
-                            [nameButtonRect]="buttonOne" [showSecondButton]="false" (clickButtonRect)="openDialog(usuario)">
+    <ng-container *ngIf="gerentes.length > 0">
+      <app-rectangular-card *ngFor="let g of gerentes" [nome]="g.nome"
+                            [firstLabel]="'Clientes'" [firstValue]="g.numeroClientes.toString()" [secondLabel]="'Saldo Positivo'" [secondValue]="g.saldoPositivoTotal.toString()" [thirdLabel]="'Saldo Negativo'" [thirdValue]="g.saldoNegativoTotal.toString()"
+                            [showButton]="false" [showSecondButton]="false">
       </app-rectangular-card>
     </ng-container>
   </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="usuarios.length || 0"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="gerentes.length || 0"></mat-paginator>
 </div>

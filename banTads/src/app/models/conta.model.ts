@@ -1,3 +1,5 @@
+import {Saldo} from "./saldo.model";
+
 export class Conta {
   public numeroConta!: number;
   public aprovada: boolean | null = null;
@@ -6,7 +8,7 @@ export class Conta {
   public limite: number = 0;
   public idGerente!: number;
   public motivo: string | null = null;
-  public saldo: number | null = null;
+  public saldo!: Saldo;
 
   constructor(
     numeroConta?: number,
@@ -16,7 +18,7 @@ export class Conta {
     limite?: number,
     idGerente?: number,
     motivo?: string | null,
-    saldo?: number | null) {
+    saldo?: Saldo) {
     if(numeroConta) this.numeroConta = numeroConta;
     if(aprovada !== undefined) this.aprovada = aprovada;
     if(idCliente) this.idCliente = idCliente;

@@ -12,8 +12,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ConsultaClienteComponent } from './gerente/consulta-cliente/consulta-cliente.component';
-import { ListarClientesComponent } from './gerente/listar-clientes/listar-clientes.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SelfRegisterComponent } from './pages/login/self-register/self-register.component';
 import { MatFormField } from "@angular/material/form-field";
@@ -22,7 +20,6 @@ import { MaterialModule } from "./material/material.module";
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { SquareCardComponent } from './components/cards/square-card/square-card.component';
-import { SquareButtonComponent } from './components/buttons/square-button/square-button.component';
 import { RectangularCardComponent } from './components/cards/rectangular-card/rectangular-card.component';
 import { TableCardComponent } from './components/cards/table-card/table-card.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
@@ -34,25 +31,22 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
-import { DepositoComponent } from './pages/cliente/deposito/deposito.component';
 import { MovimentacaoComponent } from './pages/cliente/movimentacao/movimentacao.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './services/login.service';
 import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
+import {Top3Component} from "./pages/gerente/top3/top3.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     NavbarComponent,
-    ConsultaClienteComponent,
-    ListarClientesComponent,
     LoginComponent,
     SelfRegisterComponent,
     UserDetailsComponent,
     ClienteComponent,
     SquareCardComponent,
-    SquareButtonComponent,
     RectangularCardComponent,
     TableCardComponent,
     EditarPerfilComponent,
@@ -61,9 +55,9 @@ import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recu
     ListarClienteComponent,
     ConsultarClienteComponent,
     ExtratoComponent,
-    DepositoComponent,
     MovimentacaoComponent,
-    MotivoRecusaComponent
+    MotivoRecusaComponent,
+    Top3Component
   ],
   imports: [
     BrowserModule,
@@ -83,7 +77,8 @@ import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recu
     BrowserAnimationsModule,
   ],
   providers: [
-    LoginService, CookieService,
+    LoginService,
+    CookieService,
     provideAnimationsAsync(),
     provideAnimations(),
     provideToastr(),

@@ -1,9 +1,12 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Usuario} from "../../../models/Usuario.model";
+import {Usuario} from "../../../models/usuario.model";
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Observable} from "rxjs";
+import {ToastrService} from "ngx-toastr";
+import {GerenteService} from "../../../services/gerente.service";
+import {Cliente} from "../../../models/cliente.model";
 
 @Component({
   selector: 'app-consultar-cliente',
@@ -12,61 +15,16 @@ import {Observable} from "rxjs";
 })
 export class ConsultarClienteComponent {
   inputValue: string = '';
-  //usuarioLogado: Usuario = new Usuario();
-  usuarios: Usuario[] = [
-    new Usuario(1,'usuario 1','usuario1@email.com'),
-  ];
-  buttonOne: string = "Aprovar";
-  firstButtonColor: string = "btn-green";
-  buttonTwo: string = "Recusar";
-  secondButtonColor: string = "btn-red";
-
-
+  cliente!: Cliente;
+  dataSource!: MatTableDataSource<Usuario>;
 
   constructor(
-    // private title: TitleService,
-    // private userService: UsuarioService,
-    private cdr: ChangeDetectorRef,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
-    // public loginService: LoginService
+    private gerenteService: GerenteService
   ) { }
-  ngOnInit(): void {
-    // this.title.setTitle('Listar Usuários');
-    // this.usuarioLogado = this.loginService.usuarioLogado
-    // if (!this.usuarioLogado) {
-    //   this.router.navigate(['login']);
-    // } else {
-    //   // this.instanciarUsuarios();
-    // }
-
-  }
-  @ViewChild('table') table: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource!: MatTableDataSource<Usuario>;
-  obs!: Observable<Usuario[]>;
-  // instanciarUsuarios() {
-  //   this.userService.listarTodosUsuarios().subscribe(
-  //     (usuarios) => {
-  //       this.usuarios = usuarios;
-  //       this.dataSource = new MatTableDataSource(this.usuarios);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.cdr.detectChanges();
-  //       this.obs = this.dataSource.connect();
-  //       this.toastr.success('Usuários listados com sucesso!');
-  //     },
-  //     (error) => {
-  //       this.toastr.error('Erro ao listar usuários!');
-  //     }
-  //   );
-  //   if (this.table) {
-  //     this.dataSource = new MatTableDataSource<Usuario>(this.usuarios);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.cdr.detectChanges();
-  //     this.obs = this.dataSource.connect();
-  //   }
-  // }
 
   ngOnDestroy() {
     if (this.dataSource) {
@@ -84,8 +42,19 @@ export class ConsultarClienteComponent {
       }
     }
   }
+
+  searchClienteByCpf(searchTerm: string): void {
+    this.gerenteService.searchClienteByCpf(searchTerm).subscribe((cliente: Cliente) => {
+      if (cliente) {
+        this.cliente = cliente;
+
+      } else {
+        this.toastr.error('Cliente não encontrado');
+      }
+    });
+  }
+
   openDialog(usuario: Usuario) {
     this.router.navigate([`admin/editar/${usuario.id}`]);
   }
-
 }

@@ -1,11 +1,11 @@
 <div class="let-of-cards">
   <ng-container>
-    <ng-container *ngIf="usuarios.length > 0">
-      <app-rectangular-card *ngFor="let usuario of usuarios" [nome]="usuario.nome ? usuario.nome.toString() : ''"
-                            [firstLabel]="'CPF'" [firstValue]="usuario.cpf" [secondLabel]="'Salário'" [secondValue]="'R$ '+ usuario.salario.toString()"
-                            [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="aprovarUsuario(usuario)" (clickSecondButtonRect)="openDialog(usuario)">
+    <ng-container *ngIf="clientes.length > 0">
+      <app-rectangular-card *ngFor="let c of clientes" [nome]="c.nome ? c.nome.toString() : ''"
+                            [firstLabel]="'CPF'" [firstValue]="c.cpf" [secondLabel]="'Salário'" [secondValue]="'R$ '+ c.salario.toString()"
+                            [nameButtonRect]="buttonOne" [buttonColor]="firstButtonColor" [showSecondButton]="true" [nameSecondButtonRect]="buttonTwo" [secondButtonColor]="secondButtonColor" (clickButtonRect)="aprovarCliente(c)" (clickSecondButtonRect)="openDialog(c)">
       </app-rectangular-card>
     </ng-container>
   </ng-container>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="usuarios.length || 0"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="clientes.length || 0"></mat-paginator>
 </div>
