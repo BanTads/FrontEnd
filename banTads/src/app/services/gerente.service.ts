@@ -25,7 +25,7 @@ export class GerenteService {
   }
 
   aprovarCliente(cliente: Cliente): Observable<any> {
-    const url = `${this.BASE_URL}/cliente/atualizar/${cliente.conta?.numeroConta}`;
+    const url = `${this.BASE_URL}/atualizar/${cliente.conta.numeroConta}`;
     const body = {
       numeroConta: cliente.conta?.numeroConta,
       aprovada: true,
@@ -39,7 +39,7 @@ export class GerenteService {
   }
 
   recusarCliente(cliente: Cliente, motivo: string): Observable<any> {
-    const url = `${this.BASE_URL}/cliente/atualizar/${cliente.conta?.numeroConta}`;
+    const url = `${this.BASE_URL}/atualizar/${cliente.conta.numeroConta}`;
     const body = {
       numeroConta: cliente.conta?.numeroConta,
       aprovada: false,
