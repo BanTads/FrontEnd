@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Cliente } from "../models/cliente.model";
 import { CookieService } from 'ngx-cookie-service';
 import {map} from "rxjs/operators";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ import {map} from "rxjs/operators";
 export class GerenteService {
   private BASE_URL = 'http://localhost:3000';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private toastr: ToastrService
+  ) { }
 
   loadUsuariosPendentes(): Observable<{ data: Cliente[] }> {
     const cookieValue = this.cookieService.get('usuarioLogado');
@@ -89,10 +94,35 @@ export class GerenteService {
         cliente.email
       )))
     );
+
+
+
   }
 
+  searchClienteByCpf(searchTerm: string): Observable<Cliente> {
+    const cookieValue = this.cookieService.get('usuarioLogado');
+    const gerenteId = JSON.parse(cookieValue).gerente.id;
+    let apiUrl = `${this.BASE_URL}/clientes/${gerenteId}`;
 
-  //TODO BUSCAR CLIENTE POR CPF OU NOME
-  //consultar cliente especifico por cpf
+    if (!isNaN(Number(searchTerm.charAt(0)))) {
+      apiUrl += `?cpf=${searchTerm}`;
+    } else {
+      this.toastr.error("A busca deve ser feita pelo CPF!");
+    }
+
+    return this.http.get<any>(apiUrl).pipe(
+      map(response => response.data.map((cliente: any) => new Cliente(
+        cliente.cpf,
+        cliente.telefone,
+        '',
+        cliente.salario,
+        cliente.conta,
+        cliente.endereco,
+        cliente.id,
+        cliente.nome,
+        cliente.email
+      )))
+    );
+  }
   // consultar 3 melhores clientes
 }

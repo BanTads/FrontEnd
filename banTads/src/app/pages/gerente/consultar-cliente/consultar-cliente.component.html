@@ -1,5 +1,7 @@
 <mat-form-field>
   <mat-label>Pesquisar por CPF</mat-label>
   <input matInput #input (keyup)="applyFilter($event)">
-  <mat-icon matSuffix>search</mat-icon>
+  <button mat-icon-button matSuffix (click)="searchClienteByCpf(input.value)">
+    <mat-icon>search</mat-icon>
+  </button>
 </mat-form-field>

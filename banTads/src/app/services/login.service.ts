@@ -55,7 +55,6 @@ export class LoginService {
     this.usuarioLogadoSubject.next(null);
     this.cookieService.delete(COOKIE_USUARIO);
     this.cookieService.delete(COOKIE_TOKEN);
-    this.httpClient.post<ApiResponseLogin>(this.BASE_URL + '/logout', {}, this.httpOptions).subscribe();
     window.location.reload();
   }
 
