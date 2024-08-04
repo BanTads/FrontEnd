@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
 import { LoginService } from '../../services/login.service';
+import { GeocodingService } from '../../services/geocoding.service'; // Importe o serviço de geocoding
 
 @Component({
   selector: 'app-editar-perfil',
@@ -10,30 +11,37 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./editar-perfil.component.scss']
 })
 export class EditarPerfilComponent implements OnInit {
-  constructor(private clienteService: ClienteService, private loginService: LoginService) { }
-
-  formData = {
-    nome: '', email: '', telefone: '', cpf: '', salario: 0,
-    tipo: '', logradouro: '', numero: '', complemento: '',
-    cep: '', cidade: '', uf: ''
-  }
-
-  tipo: string[] = [
-    "Rua", "Avenida", "Alameda", "Travessa", "Praça",
-    "Estrada", "Rodovia", "Viela", "Largo", "Passarela"
-  ];
-
-  estado: string[] = [
-    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
-    "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
-    "RS", "RO", "RR", "SC", "SP", "SE", "TO"
-  ];
-
-  hide: boolean = true;
-  senha: string = '';
-  confirmarSenha: string = '';
-  senhaValida: boolean = false;
+  formCliente: FormGroup;
   cliente!: Cliente;
+  tipo: string[] = ["Rua", "Avenida", "Alameda", "Travessa", "Praça", "Estrada", "Rodovia", "Viela", "Largo", "Passarela"];
+  estado: string[] = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+        "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
+        "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+      ];
+  addressSuggestions: any[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private clienteService: ClienteService,
+    private loginService: LoginService,
+    private geocodingService: GeocodingService
+  ) {
+    this.formCliente = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required],
+      cpf: [{ value: '', disabled: true }, Validators.required],
+      salario: ['', Validators.required],
+      tipo: ['', Validators.required],
+      logradouro: ['', Validators.required],
+      numero: ['', Validators.required],
+      complemento: [''],
+      cep: ['', Validators.required],
+      cidade: ['', Validators.required],
+      estado: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.carregarCliente();
@@ -43,7 +51,7 @@ export class EditarPerfilComponent implements OnInit {
     this.clienteService.getClienteByCpf().subscribe({
       next: (cliente: Cliente) => {
         this.cliente = cliente;
-        this.formData = {
+        this.formCliente.patchValue({
           nome: cliente.nome,
           email: cliente.email,
           telefone: cliente.telefone,
@@ -55,59 +63,71 @@ export class EditarPerfilComponent implements OnInit {
           complemento: cliente.endereco.complemento,
           cep: cliente.endereco.cep,
           cidade: cliente.endereco.cidade,
-          uf: cliente.endereco.uf
-        };
+          estado: cliente.endereco.uf
+        });
       },
       error: (error: any) => console.error('Erro ao carregar cliente:', error)
     });
   }
-
-  verificarSenha() {
-    const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
-
-    if (
-      senhaRegex.test(this.senha) &&
-      this.senha === this.confirmarSenha
-    ) {
-      this.senhaValida = true;
-    } else {
-      this.senhaValida = false;
-    }
-  }
-
-  salvar(formCliente: NgForm) {
-    if (formCliente.valid && this.senhaValida) {
-      const clienteAtualizado: Cliente = {
-        ...this.cliente,
-        nome: this.formData.nome,
-        email: this.formData.email,
-        telefone: this.formData.telefone,
-        cpf: this.formData.cpf,
-        salario: this.formData.salario,
+  
+  salvar() {
+    console.log('Formulário:', this.formCliente.value);
+    
+    if (this.formCliente.valid) {
+      const requestBody = {
+        nome: this.formCliente.value.nome,
+        email: this.formCliente.value.email,
+        telefone: this.formCliente.value.telefone,
+        salario: this.formCliente.value.salario,
         endereco: {
-          id: this.cliente.endereco.id,
-          tipo: this.formData.tipo,
-          logradouro: this.formData.logradouro,
-          numero: this.formData.numero,
-          complemento: this.formData.complemento,
-          cep: this.formData.cep,
-          cidade: this.formData.cidade,
-          uf: this.formData.uf
+          tipo: this.formCliente.value.tipo,
+          logradouro: this.formCliente.value.logradouro,
+          numero: this.formCliente.value.numero,
+          complemento: this.formCliente.value.complemento,
+          cep: this.formCliente.value.cep,
+          cidade: this.formCliente.value.cidade,
+          uf: this.formCliente.value.estado
         }
       };
-
-      console.log('Atualizando cliente:', clienteAtualizado);
-
-      this.clienteService.atualizaClientePorId(clienteAtualizado).subscribe({
-        next: (res) => console.log('Cliente atualizado com sucesso', res),
-        error: (err) => console.error('Erro ao atualizar cliente:', err)
+      
+      this.clienteService.atualizaClientePorId(this.cliente.id, requestBody).subscribe({
+        next: (response) => {
+          console.log('Cliente atualizado com sucesso:', response);
+          this.loginService.atualizaUsuarioLogado(response);
+        },
+        error: (error) => console.error('Erro ao atualizar cliente:', error)
+      });
+    }
+      
+  }
+  
+  searchAddress(query: string): void {
+    if (query.length > 3) {
+      this.geocodingService.getAddressSuggestions(query).subscribe({
+        next: (response) => {
+          this.addressSuggestions = response;
+        },
+        error: (error) => console.error('Erro ao buscar sugestões de endereço:', error)
       });
     } else {
-      console.log('Formulário inválido ou senhas não conferem');
+      this.addressSuggestions = [];
     }
   }
 
-  autocadastrar(formCliente: NgForm) {
-    // Lógica adicional para auto-cadastro se necessário
+  onInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchAddress(input.value);
+  }
+
+  onAddressSelected(address: any): void {
+    this.formCliente.patchValue({
+      tipo: address.tipoLogradouro,
+      logradouro: address.nomeRua,
+      numero: address.numero,
+      cep: address.cep,
+      cidade: address.cidade,
+      estado: address.estado
+    });
+    this.addressSuggestions = [];
   }
 }

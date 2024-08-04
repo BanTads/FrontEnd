@@ -32,7 +32,7 @@ export class ClienteService {
           clienteData.endereco,
           clienteData.id,
           clienteData.nome,
-          clienteData.email
+          clienteData.email,
         );
       })
     );
@@ -49,25 +49,8 @@ export class ClienteService {
     return this.http.post<any>(`${this.BASE_URL}/transacao`, body);
   }
 
-  atualizaClientePorId(cliente: Cliente): Observable<any> {
-    const body = {
-      nome: cliente.nome,
-      email: cliente.email,
-      cpf: cliente.cpf,
-      telefone: cliente.telefone,
-      salario: cliente.salario,
-      endereco: {
-        tipo: cliente.endereco.tipo,
-        logradouro: cliente.endereco.logradouro,
-        numero: cliente.endereco.numero,
-        complemento: cliente.endereco.complemento,
-        cep: cliente.endereco.cep,
-        cidade: cliente.endereco.cidade,
-        uf: cliente.endereco.uf
-      }
-    };
-
-    return this.http.put<any>(`${this.BASE_URL}/${cliente.id}`, body);
+  atualizaClientePorId(idCliente: string, requestBody: any): Observable<any> {
+    return this.http.put<any>(`${this.BASE_URL}/cliente/atualizar/${idCliente}`, requestBody);
   }
 
 

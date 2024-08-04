@@ -13,11 +13,8 @@
           <p class="info-item"><strong>Aprovada:</strong> {{ data.conta.aprovada ? 'Sim' : 'Não' }}</p>
           <p class="info-item"><strong>Data de Criação:</strong> {{ data.conta.dataCriacao | date:'dd/MM/yyyy' }}</p>
           <p class="info-item"><strong>Limite:</strong> {{ formatCurrency(data.conta.limite) }}</p>
-          <p class="info-item"><strong>Logradouro:</strong> {{ data.endereco.logradouro }}</p>
-          <p class="info-item"><strong>Número:</strong> {{ data.endereco.numero }}</p>
-          <p class="info-item"><strong>CEP:</strong> {{ formatCEP(data.endereco.cep) }}</p>
-          <p class="info-item"><strong>Cidade:</strong> {{ data.endereco.cidade }}</p>
-          <p class="info-item"><strong>UF:</strong> {{ data.endereco.uf }}</p>
+          <p class="info-item"><strong>Logradouro:</strong> {{data.endereco.tipo}} {{ data.endereco.logradouro }}, {{data.endereco.numero}} - {{ data.endereco.cidade }} - {{ data.endereco.uf }} - {{ formatCEP(data.endereco.cep) }}</p>
+          
           <button mat-button (click)="onNoClick()">Fechar</button>
         </mat-card-content>
       </mat-card>
