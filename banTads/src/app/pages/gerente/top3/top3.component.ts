@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { GerenteService } from '../../../services/gerente.service';
 import { Cliente } from '../../../models/cliente.model';
+import { ModalClienteComponent } from '../listar-cliente/modal-cliente/modal-cliente.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-top3',
@@ -16,7 +18,7 @@ export class Top3Component implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private gerenteService: GerenteService) {}
+  constructor(private gerenteService: GerenteService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadTop3Clientes();
@@ -32,6 +34,40 @@ export class Top3Component implements OnInit {
   }
 
   openDialog(cliente: Cliente): void {
-    // Implement dialog opening logic here
+    const dialogRef = this.dialog.open(ModalClienteComponent, {
+      width: '600px',
+      data: cliente
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('O diálogo foi fechado');
+    });
+  }
+  formatCurrency(value: any): string {
+    if (value == null) return '';
+    
+    let numberValue = typeof value === 'number' ? value : parseFloat(value);
+    
+    const currencyConfig = {
+      align: "right",
+      allowNegative: true,
+      decimal: ",",
+      precision: 2,
+      prefix: "R$ ",
+      suffix: "",
+      thousands: "."
+    };
+
+    return currencyConfig.prefix + numberValue.toLocaleString('pt-BR', {
+      minimumFractionDigits: currencyConfig.precision,
+      maximumFractionDigits: currencyConfig.precision
+    });
+  }
+  formatCPF(cpf: string): string {
+    if (!cpf) return '';
+
+    cpf = cpf.replace(/\D/g, '');
+
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   }
 }

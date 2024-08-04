@@ -77,4 +77,34 @@ export class ListarClienteComponent implements OnInit {
       console.log('O diálogo foi fechado');
     });
   }
+
+  formatCurrency(value: number | string): string {
+    if (value == null) return '';
+
+    const numberValue = typeof value === 'number' ? value : parseFloat(value);
+
+    const currencyConfig = {
+      align: "right",
+      allowNegative: true,
+      decimal: ",",
+      precision: 2,
+      prefix: "R$ ",
+      suffix: "",
+      thousands: "."
+    };
+
+    return currencyConfig.prefix + numberValue.toLocaleString('pt-BR', {
+      minimumFractionDigits: currencyConfig.precision,
+      maximumFractionDigits: currencyConfig.precision
+    });
+  }
+
+  formatCPF(cpf: string): string {
+    if (!cpf) return '';
+
+    cpf = cpf.replace(/\D/g, '');
+
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  }
+
 }

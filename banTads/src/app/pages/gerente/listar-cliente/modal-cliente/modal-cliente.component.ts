@@ -32,8 +32,7 @@ export class ModalClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.loadCliente();
-  }
+    }
 
   ngOnDestroy() {
     if (this.dataSource) {
@@ -43,20 +42,32 @@ export class ModalClienteComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  formatCPF(cpf: string): string {
+    if (!cpf) return '';
+    return cpf.replace(/\D/g, '')
+              .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  }
 
-  // loadCliente(idCliente: Cliente): void {
-  //   this.gerenteService.searchCliente(idCliente.id).subscribe(
-  //     cliente => {
-  //       if (cliente) {
-  //         this.cliente = cliente;
-  //         this.clienteDataSource = [cliente];
-  //       } else {
-  //         this.toastr.error('Cliente não encontrado');
-  //         this.clienteDataSource = [];
-  //       }
-  //     }
-  //   );
-  //   )
+  formatPhone(phone: string): string {
+    if (!phone) return '';
+    return phone.replace(/\D/g, '')
+                .replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  }
+
+  formatCEP(cep: string): string {
+    if (!cep) return '';
+    return cep.replace(/\D/g, '')
+              .replace(/(\d{5})(\d{3})/, '$1-$2');
+  }
+
+  formatCurrency(value: number | string): string {
+    if (value == null) return '';
+    const numberValue = typeof value === 'number' ? value : parseFloat(value);
+    return 'R$ ' + numberValue.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
   }
   
   

@@ -6,17 +6,15 @@
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
-  <ng-container>
-    <ng-container *ngIf="usuarios.length > 0">
-      <app-rectangular-card *ngFor="let c of usuarios"
-                            [nome]="c.nome ? c.nome.toString() : ''"
-                            [firstLabel]="'CPF'" [firstValue]="c.cpf"
-                            [secondLabel]="'Cidade'" [secondValue]="c.endereco.cidade +' - '+ c.endereco.uf"
-                            [thirdLabel]="'Saldo'" [thirdValue]="'R$ '+ c.conta.saldo.total.toString()"
-                            [nameButtonRect]="buttonOne" [showSecondButton]="false"
-                            (clickButtonRect)="openDialog(c)">
-      </app-rectangular-card>
-    </ng-container>
+  <ng-container *ngIf="usuarios.length > 0">
+    <app-rectangular-card *ngFor="let c of usuarios"
+                          [nome]="c.nome ? c.nome.toString() : ''"
+                          [firstLabel]="'CPF'" [firstValue]="formatCPF(c.cpf)"
+                          [secondLabel]="'Cidade'" [secondValue]="c.endereco.cidade + ' - ' + c.endereco.uf"
+                          [thirdLabel]="'Saldo'" [thirdValue]="formatCurrency(c.conta.saldo.total)"
+                          [nameButtonRect]="buttonOne" [showSecondButton]="false"
+                          (clickButtonRect)="openDialog(c)">
+    </app-rectangular-card>
   </ng-container>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="usuarios.length || 0"></mat-paginator>
