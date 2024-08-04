@@ -37,6 +37,7 @@ import { LoginService } from './services/login.service';
 import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
 import {Top3Component} from "./pages/gerente/top3/top3.component";
 import {ListarClientesComponent} from "./pages/admin/listar-clientes/listar-clientes.component";
+import { ListarGerentesComponent } from './pages/admin/listar-gerentes/listar-gerentes.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {ListarClientesComponent} from "./pages/admin/listar-clientes/listar-clie
     MovimentacaoComponent,
     MotivoRecusaComponent,
     Top3Component,
-    ListarClientesComponent
+    ListarClientesComponent,
+    ListarGerentesComponent
   ],
   imports: [
     BrowserModule,

@@ -31,16 +31,12 @@ export class LoginService {
 
   public get usuarioLogado(): Usuario | null {
     const usu = this.cookieService.get(COOKIE_USUARIO);
-    console.log('usu', usu);
     return usu ? JSON.parse(usu) : null;
 
   }
 
   public set usuarioLogado(usuario: Usuario | null) {
-    console.log('usuario', usuario);
-    console.trace();
     if (usuario) {
-
       this.cookieService.set(COOKIE_USUARIO, JSON.stringify(usuario));
     } else {
       this.cookieService.delete(COOKIE_USUARIO);

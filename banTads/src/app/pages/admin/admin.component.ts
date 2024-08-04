@@ -56,6 +56,7 @@ export class AdminComponent implements OnInit {
     this.adminService.getGerentes().subscribe({
       next: (gerentes: Gerente[]) => {
         this.gerentes = gerentes;
+        console.log(gerentes);
         if (this.gerentes.length > 0) {
           this.dataSource = new MatTableDataSource(this.gerentes);
           this.dataSource.paginator = this.paginator;

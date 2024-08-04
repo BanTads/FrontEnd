@@ -12,10 +12,6 @@ import {Router} from "@angular/router";
 })
 export class ListarClientesComponent {
   clientes: Cliente[] = [];
-  buttonOne: string = "Detalhes";
-  firstButtonColor: string = "btn-green";
-  buttonTwo: string = "Recusar";
-  secondButtonColor: string = "btn-red";
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource!: MatTableDataSource<Cliente>;

@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { AuthGuard } from "../login/auth-guard";
 import {ListarClientesComponent} from "./listar-clientes/listar-clientes.component";
+import {ListarGerentesComponent} from "./listar-gerentes/listar-gerentes.component";
 
 export const AdminRoutes: Routes = [
   {
@@ -23,8 +24,12 @@ export const AdminRoutes: Routes = [
         canActivate: [AuthGuard],
         data: { expectedRole: ['ADMIN'] }
       },
-      // {
-      //   path: 'gestao-de-gerentes'
-      // },
+      {
+        path: 'gestao-de-gerentes',
+        component: ListarGerentesComponent,
+        title: 'Relatório de Gerentes',
+        canActivate: [AuthGuard],
+        data: { expectedRole: ['ADMIN'] }
+      },
 
 ]
