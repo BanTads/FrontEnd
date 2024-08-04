@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import {ClienteService} from "../../services/cliente.service";
+import {Cliente} from "../../models/cliente.model";
 
 @Component({
   selector: 'app-cliente',
@@ -8,26 +10,38 @@ import { Router } from '@angular/router';
 })
 export class ClienteComponent implements OnInit {
   @Output() tipoMovimentacao: number = 0;
-  constructor(private router: Router
+
+  cliente!: Cliente;
+  saldoColor!: string;
+
+  constructor(
+    private router: Router,
+    private clienteService: ClienteService
   ){}
 
-ngOnInit(): void {
 
-}
+
+  ngOnInit(): void {
+    this.clienteService.getClienteByCpf().subscribe({
+      next: (cliente: Cliente) => {
+        this.cliente = cliente;
+        if (this.cliente.conta.saldo.saldo < 0) {
+          this.saldoColor = 'red';
+        } else if (this.cliente.conta.saldo.saldo > 0){
+          this.saldoColor = 'green';
+        } else {
+          this.saldoColor = 'black';
+        }
+        console.log('Cliente:', this.cliente);
+      },
+      error: (error) => {
+        console.error('Error fetching cliente:', error);
+      }
+    });
+  }
+
   movimentar(tipoMovimentacao: number) {
-    switch (tipoMovimentacao) {
-      case 0:
-        this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao } });
-        break;
-      case 1:
-        this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao } });
-        break;
-      case 2:
-        this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao } });
-        break;
-      default:
-        break;
-    }
+    this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao, contaOrigem: this.cliente.conta.numeroConta, saldo: this.cliente.conta.saldo.total } });
   }
 
 }

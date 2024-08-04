@@ -1,40 +1,39 @@
 <form #formMovimentacao="ngForm">
-    <div class="form">
-        <h1>{{title}}</h1>
-        <ng-container *ngIf="tipoMovimentacao === 0">
-            <mat-form-field>
-                <input matInput placeholder="Valor do depósito" type="number" [(ngModel)]="valor" name="valor">
-            </mat-form-field>
-        </ng-container>
-        <ng-container *ngIf="tipoMovimentacao === 1">
-            <div class="saldo">
-                <p>Saldo da conta corrente + limite disponível:</p>
-                <p>R$ {{saldoContaCorrente}}</p>
-            </div>
-            <mat-form-field>
-                <input matInput placeholder="Valor do saque" type="number" [(ngModel)]="valor" name="valor">
-            </mat-form-field>
-        </ng-container>
-        <ng-container *ngIf="tipoMovimentacao === 2">
-            <div class="saldo">
-                <p>Saldo da conta corrente + limite disponível: R$ </p>
-                <p>{{saldoContaCorrente}}</p>
-            </div>
-            <mat-form-field>
-                <input matInput placeholder="Valor da transferência" type="number" [(ngModel)]="valor" name="valor">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Número da conta corrente destino" type="number"
-                    name="numeroContaCorrenteDestino" [(ngModel)]="numeroContaCorrenteDestino">
-            </mat-form-field>
-        </ng-container>
-    </div>
-    <div class="btns">
-        <button *ngIf="tipoMovimentacao === 0" mat-raised-button color="primary"
-            (click)="depositar()">Depositar</button>
-        <button *ngIf="tipoMovimentacao === 1" mat-raised-button color="primary" (click)="sacar()">Sacar</button>
-        <button *ngIf="tipoMovimentacao === 2" mat-raised-button color="primary"
-            (click)="transferir()">Transferir</button>
-        <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
-    </div>
+  <div class="form">
+    <h1>{{title}}</h1>
+
+    <ng-container *ngIf="tipoMovimentacao === TipoMovimentacao.DEPOSITO">
+      <mat-form-field>
+        <input matInput placeholder="Valor do depósito" type="number" [(ngModel)]="valor" name="valor">
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="tipoMovimentacao === TipoMovimentacao.SAQUE">
+      <div class="saldo">
+        <p>Saldo da conta corrente + limite disponível:</p>
+        <p>R$ {{saldoContaCorrente}}</p>
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Valor do saque" type="number" [(ngModel)]="valor" name="valor">
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="tipoMovimentacao === TipoMovimentacao.TRANSFERENCIA">
+      <div class="saldo">
+        <p>Saldo da conta corrente + limite disponível: R$ {{saldoContaCorrente}}</p>
+      </div>
+      <mat-form-field>
+        <mat-label>Valor da Transferência</mat-label>
+        <input matInput placeholder="Valor da transferência" type="number" [(ngModel)]="valor" name="valor">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Número da Conta Destino</mat-label>
+        <input matInput placeholder="Número da conta corrente destino" type="number" name="numeroContaCorrenteDestino" [(ngModel)]="numeroContaCorrenteDestino">
+      </mat-form-field>
+    </ng-container>
+  </div>
+  <div class="btns">
+    <button mat-raised-button color="primary" (click)="movimentar()">Confirmar</button>
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+  </div>
 </form>
