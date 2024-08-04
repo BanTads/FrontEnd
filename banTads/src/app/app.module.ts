@@ -36,6 +36,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './services/login.service';
 import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
 import {Top3Component} from "./pages/gerente/top3/top3.component";
+
+import {ListarClientesComponent} from "./pages/admin/listar-clientes/listar-clientes.component";
+import { ListarGerentesComponent } from './pages/admin/listar-gerentes/listar-gerentes.component';
+
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule } from 'ng2-currency-mask';
 import { ModalClienteComponent } from './pages/gerente/listar-cliente/modal-cliente/modal-cliente.component';
@@ -72,6 +76,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MovimentacaoComponent,
     MotivoRecusaComponent,
     Top3Component,
+    ListarClientesComponent,
+    ListarGerentesComponent
     ModalClienteComponent,
   ],
   imports: [

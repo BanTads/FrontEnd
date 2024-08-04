@@ -5,6 +5,8 @@ export class Gerente extends Usuario {
     public numeroClientes: number = 0,
     public saldoPositivoTotal: number = 0,
     public saldoNegativoTotal: number = 0,
+    public cpf: string = "",
+    public telefone: string = "",
     id?: string,
     nome?: string,
     email?: string,
