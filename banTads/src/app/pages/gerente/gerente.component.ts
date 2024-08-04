@@ -102,9 +102,37 @@ export class GerenteComponent implements OnInit {
     });
   }
 
+  formatCurrency(value: number | string): string {
+    if (value == null) return '';
+    
+    let numberValue = +value;
+    
+    const currencyConfig = {
+      align: "right",
+      allowNegative: true,
+      decimal: ",",
+      precision: 2,
+      prefix: "R$ ",
+      suffix: "",
+      thousands: "."
+    };
+
+    return currencyConfig.prefix + numberValue.toLocaleString('pt-BR', {
+      minimumFractionDigits: currencyConfig.precision,
+      maximumFractionDigits: currencyConfig.precision
+    });
+  }
+
   private removerUsuarioDaLista(cliente: Cliente) {
     this.clientes = this.clientes.filter(c => c.id !== cliente.id);
     this.dataSource.data = this.clientes;
     this.cdr.detectChanges();
+  }
+  formatCPF(cpf: string): string {
+    if (!cpf) return '';
+
+    cpf = cpf.replace(/\D/g, '');
+
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   }
 }

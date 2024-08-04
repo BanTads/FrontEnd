@@ -67,8 +67,8 @@ export class LoginComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(SelfRegisterComponent, {
-      width: '60rem',
-      height: '40rem'
+      width: '65rem',
+      height: '45rem'
     });
 
     dialogRef.afterClosed().subscribe(result => {

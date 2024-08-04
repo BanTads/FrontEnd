@@ -37,6 +37,13 @@ export const ClienteRoutes: Routes = [
                 title: 'Consulta Extrato',
                 canActivate: [AuthGuard],
                 data: { expectedRole: ['CLIENTE'] }
-            }
+            },
+            {
+                path: 'meu-perfil/:id',
+                component: EditarPerfilComponent,
+                title: 'Meu Perfil',
+                canActivate: [AuthGuard],
+                data: { expectedRole: ['CLIENTE'] }
+            },
      
 ];

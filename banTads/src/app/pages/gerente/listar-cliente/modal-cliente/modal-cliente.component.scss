@@ -7,11 +7,6 @@
     align-items: left;
 }
 
-.search-form {
-    width: 100%;
-    max-width: 600px;
-}
-
 .infos {
     display: flex;
     flex-direction: row;
@@ -26,24 +21,6 @@
     :nth-child(1) {
         padding-top: 5px;
     }
-}
-
-mat-form-field {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-mat-form-field .mat-form-field-wrapper {
-    border-radius: 12px;
-}
-
-mat-form-field .mat-form-field-label {
-    font-size: 1rem;
-}
-
-mat-form-field input {
-    font-size: 1rem;
 }
 
 .cliente-card {
@@ -86,7 +63,6 @@ mat-card-content {
 .info-item strong {
     width: auto;
     font-weight: 600;
-    // color: #333;
 }
 
 .info-item span {

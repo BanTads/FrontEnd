@@ -1,7 +1,107 @@
-<mat-form-field>
-  <mat-label>Pesquisar por CPF</mat-label>
-  <input matInput #input (keyup)="applyFilter($event)">
-  <button mat-icon-button matSuffix (click)="searchClienteByCpf(input.value)">
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-form-field>
+<mat-card class="container">
+  <mat-card-header>
+    <form (submit)="searchClienteByCpf(input.value)">
+      <mat-form-field class="search-form">
+        <mat-label>Pesquisar por CPF</mat-label>
+        <input matInput #input [mask]="'000.000.000-00'" (keyup)="applyFilter($event)">
+        <button mat-icon-button matSuffix type="submit">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-card class="cliente-card" *ngFor="let element of clienteDataSource">
+      <mat-card-header>
+        <mat-card-title>{{ element.nome }}</mat-card-title>
+        <mat-card-subtitle>{{ element.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="infos">
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.cpf | mask:'000.000.000-00'" currencyMask [readonly]="true">
+            <mat-label>CPF</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.telefone | mask:'(00) 00000-0000'" currencyMask [readonly]="true">
+            <mat-label>Telefone</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input
+            matInput
+            currencyMask
+            [options]="CustomCurrencyMaskConfig"
+            [(ngModel)]="element.salario"
+            [ngModel]="element.salario"
+            [readonly]="true"
+          />            <mat-label>Salário</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.conta.numeroConta" currencyMask [readonly]="true">
+            <mat-label>Número da Conta</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.conta.aprovada ? 'Sim' : 'Não'" currencyMask [readonly]="true">
+            <mat-label>Aprovada</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.conta.dataCriacao | date:'dd/MM/yyyy'" currencyMask [readonly]="true">
+            <mat-label>Data de Criação</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput
+            currencyMask
+            [options]="CustomCurrencyMaskConfig"
+            [(ngModel)]="element.salario"
+            [ngModel]="element.salario"
+            [readonly]="true">
+            <mat-label>Limite</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.endereco.logradouro" currencyMask [readonly]="true">
+            <mat-label>Logradouro</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.endereco.numero" currencyMask [readonly]="true">
+            <mat-label>Número</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.endereco.cep | mask:'00.000-000'" currencyMask [readonly]="true">
+            <mat-label>CEP</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.endereco.cidade" currencyMask [readonly]="true">
+            <mat-label>Cidade</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="info-item">
+          <mat-form-field class="info-field">
+            <input matInput [value]="element.endereco.uf" currencyMask [readonly]="true">
+            <mat-label>UF</mat-label>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

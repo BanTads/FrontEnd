@@ -7,6 +7,8 @@ import {Observable} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {GerenteService} from "../../../services/gerente.service";
 import {Cliente} from "../../../models/cliente.model";
+import { CurrencyMaskConfig } from 'ng2-currency-mask';
+import { CustomCurrencyMaskConfig } from '../../../app.module';
 
 @Component({
   selector: 'app-consultar-cliente',
@@ -14,9 +16,11 @@ import {Cliente} from "../../../models/cliente.model";
   styleUrl: './consultar-cliente.component.scss'
 })
 export class ConsultarClienteComponent {
+  CustomCurrencyMaskConfig: CurrencyMaskConfig = CustomCurrencyMaskConfig;
   inputValue: string = '';
   cliente!: Cliente;
   dataSource!: MatTableDataSource<Usuario>;
+  clienteDataSource: Cliente[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -44,17 +48,19 @@ export class ConsultarClienteComponent {
   }
 
   searchClienteByCpf(searchTerm: string): void {
-    this.gerenteService.searchClienteByCpf(searchTerm).subscribe((cliente: Cliente) => {
-      if (cliente) {
-        this.cliente = cliente;
-
-      } else {
-        this.toastr.error('Cliente não encontrado');
-      }
-    });
-  }
-
-  openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
+    if (searchTerm.length) {
+      this.gerenteService.searchClienteByCpf(searchTerm).subscribe(cliente => {
+        if (cliente) {
+          this.cliente = cliente;
+          this.clienteDataSource = [cliente];
+        } else {
+          this.toastr.error('Cliente não encontrado');
+          this.clienteDataSource = [];
+        }
+      });
+    } else {
+      this.toastr.error('O CPF deve ter 11 dígitos');
+      this.clienteDataSource = [];
+    }
   }
 }
