@@ -94,36 +94,21 @@ export class GerenteService {
         cliente.email
       )))
     );
-
-
-
   }
 
-  searchClienteByCpf(searchTerm: string): Observable<Cliente> {
+  searchClienteByCpf(searchTerm: string): Observable<Cliente | undefined> {
     const cookieValue = this.cookieService.get('usuarioLogado');
     const gerenteId = JSON.parse(cookieValue).gerente.id;
-    let apiUrl = `${this.BASE_URL}/clientes/${gerenteId}`;
-
-    if (!isNaN(Number(searchTerm.charAt(0)))) {
-      apiUrl += `?cpf=${searchTerm}`;
-    } else {
-      this.toastr.error("A busca deve ser feita pelo CPF!");
-    }
-
+    const apiUrl = `${this.BASE_URL}/clientes/${gerenteId}?cpf=${searchTerm}`;
+    
     return this.http.get<any>(apiUrl).pipe(
-      map(response => response.data.map((cliente: any) => new Cliente(
-        cliente.cpf,
-        cliente.telefone,
-        '',
-        cliente.salario,
-        cliente.conta,
-        cliente.endereco,
-        cliente.id,
-        cliente.nome,
-        cliente.email
-      )))
+      map(response => {
+        const clientes = response.data as Cliente[];
+        return clientes.find(cliente => cliente.cpf.includes(searchTerm));
+      })
     );
-  }
+}
+
 
   getTop3Clientes(): Observable<Cliente[]> {
     const cookieValue = this.cookieService.get('usuarioLogado');
