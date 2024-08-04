@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { Cliente } from '../models/cliente.model'; // Adjust the import path as necessary
+import { Cliente } from '../models/cliente.model';
+import {TipoMovimentacao} from "../models/tipo-movimentacao.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,17 @@ export class ClienteService {
       })
     );
   }
+
+  movimentacao(tipoMovimentacao: TipoMovimentacao, amount: number, contaOrigem: number, contaDestino: number): Observable<any> {
+    const body = {
+      tipo: TipoMovimentacao[tipoMovimentacao],
+      valor: amount,
+      idContaOrigem: contaOrigem,
+      idContaDestino: tipoMovimentacao === TipoMovimentacao.TRANSFERENCIA ? contaDestino : contaOrigem
+    };
+
+    return this.http.post<any>(`${this.BASE_URL}/transacao`, body);
+  }
+
+
 }

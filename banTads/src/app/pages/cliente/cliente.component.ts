@@ -41,7 +41,7 @@ export class ClienteComponent implements OnInit {
   }
 
   movimentar(tipoMovimentacao: number) {
-    this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao } });
+    this.router.navigate(['/movimentacao'], { queryParams: { tipoMovimentacao: tipoMovimentacao, contaOrigem: this.cliente.conta.numeroConta, saldo: this.cliente.conta.saldo.total } });
   }
 
 }

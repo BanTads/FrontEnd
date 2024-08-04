@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {ClienteService} from "../../../services/cliente.service";
+import {TipoMovimentacao} from "../../../models/tipo-movimentacao.enum";
 
 @Component({
   selector: 'app-movimentacao',
@@ -8,80 +10,64 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './movimentacao.component.scss'
 })
 export class MovimentacaoComponent implements OnInit {
-  //tipos de movimentação: 
-  // 0 - DEPOSITO
-  // 1 - SAQUE
-  // 2 - TRANSFERENCIA
+  title!: string;
+  tipoMovimentacao: number = 0;
+  valor: number = 0;
+  numeroContaCorrenteDestino: number = 0;
+  saldoContaCorrente: number = 0;
+  contaOrigem: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastrService
-  ) {
-    this.tipoMovimentacao = this.route.snapshot.queryParams['tipoMovimentacao'];
-    this.valor = this.route.snapshot.queryParams['valor'];
-    this.numeroContaCorrenteDestino = this.route.snapshot.queryParams['numeroContaCorrenteDestino'];
-  }
-  tpMov!: number;
+    private toastService: ToastrService,
+    private clienteService: ClienteService
+  ) {}
+
   ngOnInit(): void {
-    // this.tipoMovimentacao = 2;
     this.route.queryParams.subscribe(params => {
       this.tipoMovimentacao = Number(params['tipoMovimentacao']);
+      this.contaOrigem = Number(params['contaOrigem']);
+      this.saldoContaCorrente = Number(params['saldo']);
     });
     this.setTitle();
-
-
   }
-  saldoContaCorrente: number = 110;
-  title!: string;
-  tipoMovimentacao: number = 0;// alterar para 0, 1 ou 2
-  valor: number = 0;
-  numeroContaCorrenteDestino: number = 0;
-  sacar() { 
-    if (this.valor > this.saldoContaCorrente) {
-      this.toastService.error('Saldo insuficiente');
-    } else {
-      this.saldoContaCorrente -= this.valor;
-      this.toastService.success('Saque realizado com sucesso');
-    }
-  }
-  depositar() { 
-    this.saldoContaCorrente += this.valor;
-    this.toastService.success('Depósito realizado com sucesso');
-  }
-  transferir() { 
-    if (this.valor > this.saldoContaCorrente) {
-      this.toastService.error('Saldo insuficiente');
-    } else {
-      this.saldoContaCorrente -= this.valor;
-      this.toastService.success('Transferência realizada com sucesso');
-    }
-  }
-  cancelar() { 
-    if (this.tipoMovimentacao == 0) {
-      this.router.navigate(['cliente/deposito']);
-    } else if (this.tipoMovimentacao == 1) {
-      this.router.navigate(['cliente/saque']);
-    } else {
-      this.router.navigate(['cliente/transferencia']);
-    }
-  }
-
 
   setTitle() {
     switch (this.tipoMovimentacao) {
-      case 0:
+      case TipoMovimentacao.DEPOSITO:
         this.title = 'Depósito';
         break;
-      case 1:
+      case TipoMovimentacao.SAQUE:
         this.title = 'Saque';
         break;
-      case 2:
+      case TipoMovimentacao.TRANSFERENCIA:
         this.title = 'Transferência';
         break;
       default:
         this.title = 'Erro';
     }
   }
+
+  movimentar() {
+    const contaDestino = this.tipoMovimentacao === TipoMovimentacao.TRANSFERENCIA ? this.numeroContaCorrenteDestino : this.contaOrigem;
+
+    this.clienteService.movimentacao(this.tipoMovimentacao, this.valor, this.contaOrigem, contaDestino).subscribe({
+      next: (response: any) => {
+        this.toastService.success('Movimentação realizada com sucesso!');
+        this.router.navigate(['cliente']);
+      },
+      error: (error: any) => {
+        this.toastService.error('Erro ao realizar movimentação.');
+        console.error('Error:', error);
+      }
+    });
+  }
+
+  cancelar() {
+    this.router.navigate(['cliente']);
+  }
+
+  protected readonly TipoMovimentacao = TipoMovimentacao;
 }
