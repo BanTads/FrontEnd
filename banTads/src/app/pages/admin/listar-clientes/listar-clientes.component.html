@@ -6,8 +6,7 @@
                             [firstLabel]="'Gerente'" [firstValue]="c.cargo"
                             [secondLabel]="'Limite'" [secondValue]="'R$ ' + c.conta.limite.toString()"
                             [thirdLabel]="'Saldo'" [thirdValue]="'R$ ' + c.conta.saldo.saldo.toString()"
-                            [nameButtonRect]="buttonOne" [showSecondButton]="false"
-                            (clickButtonRect)="openDialog(c)">
+                            [showButton]="false" [showSecondButton]="false">
       </app-rectangular-card>
     </ng-container>
   </ng-container>
