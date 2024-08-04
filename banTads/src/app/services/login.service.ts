@@ -74,8 +74,4 @@ export class LoginService {
         })
       );
   }
-
-  validarSenha(login: Login): Observable<boolean> {
-    return this.httpClient.post<boolean>(this.BASE_URL + '/authPassword', JSON.stringify(login), this.httpOptions);
-  }
 }

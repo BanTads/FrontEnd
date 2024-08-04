@@ -36,6 +36,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './services/login.service';
 import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recusa.component';
 import {Top3Component} from "./pages/gerente/top3/top3.component";
+import {ListarClientesComponent} from "./pages/admin/listar-clientes/listar-clientes.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {Top3Component} from "./pages/gerente/top3/top3.component";
     ExtratoComponent,
     MovimentacaoComponent,
     MotivoRecusaComponent,
-    Top3Component
+    Top3Component,
+    ListarClientesComponent
   ],
   imports: [
     BrowserModule,

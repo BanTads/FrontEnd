@@ -1,0 +1,16 @@
+<div class="let-of-cards">
+  <ng-container>
+    <ng-container *ngIf="clientes.length > 0">
+      <app-rectangular-card *ngFor="let c of clientes"
+                            [nome]="c.nome + ' - ' + c.cpf"
+                            [firstLabel]="'Gerente'" [firstValue]="c.cargo"
+                            [secondLabel]="'Limite'" [secondValue]="'R$ ' + c.conta.limite.toString()"
+                            [thirdLabel]="'Saldo'" [thirdValue]="'R$ ' + c.conta.saldo.saldo.toString()"
+                            [nameButtonRect]="buttonOne" [showSecondButton]="false"
+                            (clickButtonRect)="openDialog(c)">
+      </app-rectangular-card>
+    </ng-container>
+  </ng-container>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="clientes.length || 0"></mat-paginator>
+</div>
