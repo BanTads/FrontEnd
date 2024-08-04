@@ -1,5 +1,9 @@
 <div class="data">
-  <app-square-card></app-square-card>
+  <app-square-card
+    [cardTitle]="'Saldo Atual'"
+    [cardData]="'R$ ' + cliente.conta.saldo.saldo.toString()"
+    [dataColor]="saldoColor">
+  </app-square-card>
   <div class="button-group">
     <button class="deposito" mat-fab extended (click)="movimentar(0)">
       <mat-icon>add</mat-icon>

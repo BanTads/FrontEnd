@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-square-card',
@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './square-card.component.scss'
 })
 export class SquareCardComponent {
-
-cardTitle= 'Saldo Atual';
-cardData= "R$ 10000,00";
-dataColor= "#23B99C";
+  @Input() cardTitle: string = '';
+  @Input() cardData: string = '';
+  @Input() dataColor: string = '';
 }
