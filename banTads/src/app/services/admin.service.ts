@@ -104,16 +104,8 @@ export class AdminService {
 
   deleteGerente(gerente: Gerente): Observable<{ success: boolean, message: string }> {
     const url = `${this.BASE_URL}/remover/${gerente.id}`;
-    const body = {
-      id: gerente.id,
-      nome: gerente.nome,
-      telefone: gerente.telefone,
-      email: gerente.email,
-      cpf: gerente.cpf,
-      quantidadeContas: gerente.numeroClientes
-    };
 
-    return this.httpClient.delete<{ success: boolean, message: string }>(url, { body: body, headers: this.httpOptions.headers });
+    return this.httpClient.delete<{ success: boolean, message: string }>(url, {headers: this.httpOptions.headers });
   }
 
 

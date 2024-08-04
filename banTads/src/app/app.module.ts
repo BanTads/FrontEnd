@@ -41,6 +41,7 @@ import { ListarGerentesComponent } from './pages/admin/listar-gerentes/listar-ge
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule } from 'ng2-currency-mask';
 import { ModalClienteComponent } from './pages/gerente/listar-cliente/modal-cliente/modal-cliente.component';
+import { EditarGerenteComponent } from './pages/admin/editar-gerente/editar-gerente.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -50,7 +51,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   prefix: 'R$ ',
   suffix: '',
   thousands: '.',
-  
+
 };
 
 @NgModule({
@@ -76,11 +77,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     Top3Component,
     ListarClientesComponent,
     ListarGerentesComponent,
-    ModalClienteComponent
+    ModalClienteComponent,
+    EditarGerenteComponent
   ],
   imports: [
     CurrencyMaskModule,
-    NgxMaskDirective, 
+    NgxMaskDirective,
     NgxMaskPipe,
     BrowserModule,
     HttpClientModule,
