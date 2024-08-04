@@ -4,78 +4,89 @@
     <!-- Nome -->
     <mat-form-field class="full-input-field">
       <mat-label>Nome</mat-label>
-      <input matInput type="text" name="nome" placeholder="Nome Completo" required minlength="2" [(ngModel)]="formData.nome">
+      <input matInput type="text" name="nome" placeholder="Nome Completo" minlength="2" [(ngModel)]="formData.nome" required>
+      <mat-error>O nome é obrigatório e deve ter pelo menos 2 caracteres</mat-error>
     </mat-form-field>
 
     <!-- Email -->
     <mat-form-field class="full-input-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email" name="email" [(ngModel)]="formData.email">
+      <input matInput type="email" name="email" [(ngModel)]="formData.email" required>
+      <mat-error>O email é obrigatório</mat-error>
     </mat-form-field>
 
     <!-- Celular -->
     <mat-form-field class="full-input-field">
       <mat-label>Celular</mat-label>
-      <input matInput type="text" name="telefone" required placeholder="ex. (41)99999-9999" [(ngModel)]="formData.telefone">
+      <input matInput type="text" name="telefone" placeholder="ex. (41)99999-9999" [(ngModel)]="formData.telefone" mask="(00)00000-0000" required>
+      <mat-error>O celular é obrigatório!</mat-error>
     </mat-form-field>
 
+    <!-- CPF -->
     <mat-form-field class="half-input-field">
       <mat-label>CPF</mat-label>
-      <input matInput type="text" name="cpf" required [(ngModel)]="formData.cpf">
+      <input matInput type="text" name="cpf" [(ngModel)]="formData.cpf" mask="000.000.000-00" required>
+      <mat-error>O CPF é obrigatório!</mat-error>
     </mat-form-field>
 
     <!-- Salário -->
     <mat-form-field class="half-input-field right-input-field">
       <mat-label>Salário</mat-label>
-      <input matInput type="number" name="salario" required [(ngModel)]="formData.salario">
+      <input matInput type="text" name="salario" [(ngModel)]="formData.salario" currencyMask required>
+      <mat-error>O salário é obrigatório</mat-error>
     </mat-form-field>
 
     <!-- Endereço -->
     <mat-form-field class="small-input-field">
       <mat-label>Tipo</mat-label>
-      <mat-select name="tipo" [(ngModel)]="formData.tipo">
-        <mat-option *ngFor="let t of tipo" [value]="t">
-          {{t}}
-        </mat-option>
+      <mat-select name="tipo" [(ngModel)]="formData.tipo" required>
+      <mat-option *ngFor="let t of tipo" [value]="t">
+        {{t}}
+      </mat-option>
       </mat-select>
+      <mat-error>O tipo de endereço é obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field class="two-thirds-input-field">
       <mat-label>Logradouro</mat-label>
-      <input matInput type="text" name="logradouro" required [(ngModel)]="formData.logradouro">
+      <input matInput type="text" name="logradouro" [(ngModel)]="formData.logradouro" required>
+      <mat-error>O logradouro é obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field class="third-input-field">
       <mat-label>Número</mat-label>
-      <input matInput type="text" name="numero" required [(ngModel)]="formData.numero">
+      <input matInput type="text" name="numero" [(ngModel)]="formData.numero" required>
+      <mat-error>O número é obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field class="third-input-field right-input-field">
       <mat-label>Complemento</mat-label>
-      <input matInput type="text" name="complemento" [(ngModel)]="formData.complemento">
+      <input matInput type="text" name="complemento" [(ngModel)]="formData.complemento" >
+      
     </mat-form-field>
 
     <mat-form-field class="third-input-field right-input-field">
       <mat-label>CEP</mat-label>
-      <input matInput type="text" name="cep" required [(ngModel)]="formData.cep">
+      <input matInput type="text" name="cep" [(ngModel)]="formData.cep" mask="00000-000" required>
+      <mat-error>O CEP é obrigatório!</mat-error>
     </mat-form-field>
 
     <mat-form-field class="two-thirds-input-field">
       <mat-label>Cidade</mat-label>
-      <input matInput type="text" name="cidade" required [(ngModel)]="formData.cidade">
+      <input matInput type="text" name="cidade" [(ngModel)]="formData.cidade" required>
+      <mat-error>A cidade é obrigatória</mat-error>
     </mat-form-field>
-
-
-
 
     <mat-form-field class="small-input-field right-input-field">
       <mat-label>Estado</mat-label>
-      <mat-select name="uf" [(ngModel)]="formData.uf">
+      <mat-select name="uf" [(ngModel)]="formData.uf" required>
         <mat-option *ngFor="let e of estado" [value]="e">
           {{e}}
         </mat-option>
       </mat-select>
+      <mat-error>O estado é obrigatório</mat-error>
     </mat-form-field>
+  
   </form>
 </mat-dialog-content>
 
