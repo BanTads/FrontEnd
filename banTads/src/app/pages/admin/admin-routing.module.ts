@@ -3,6 +3,7 @@ import { AdminComponent } from "./admin.component";
 import { AuthGuard } from "../login/auth-guard";
 import {ListarClientesComponent} from "./listar-clientes/listar-clientes.component";
 import {ListarGerentesComponent} from "./listar-gerentes/listar-gerentes.component";
+import {EditarGerenteComponent} from "./editar-gerente/editar-gerente.component";
 
 export const AdminRoutes: Routes = [
   {
@@ -31,5 +32,13 @@ export const AdminRoutes: Routes = [
         canActivate: [AuthGuard],
         data: { expectedRole: ['ADMIN'] }
       },
+      {
+        path: 'editar-gerente',
+        component: EditarGerenteComponent,
+        title: 'Editar Gerente',
+        canActivate: [AuthGuard],
+        data: { expectedRole: ['ADMIN'] }
+      }
+
 
 ]

@@ -6,7 +6,7 @@
                             [firstLabel]="'CPF'" [firstValue]="g.cpf"
                             [secondLabel]="'e-mail'" [secondValue]="g.email"
                             [thirdLabel]="'Telefone'" [thirdValue]="g.telefone"
-                            [showButton]="true" [nameButtonRect]="'Editar'" [buttonColor]="firstButtonColor"
+                            [showButton]="true" [nameButtonRect]="'Editar'" [buttonColor]="firstButtonColor" (clickButtonRect)="editarGerente(g)"
                             [showSecondButton]="true" [nameSecondButtonRect]="'Excluir'" [secondButtonColor]="secondButtonColor" (clickSecondButtonRect)="deleteGerente(g)">
       </app-rectangular-card>
     </ng-container>

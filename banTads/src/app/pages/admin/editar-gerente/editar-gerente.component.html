@@ -1,40 +1,40 @@
-<!--<mat-dialog-content class="formulario">-->
-<!--  <form [formGroup]="formCliente">-->
-<!--    &lt;!&ndash; Nome &ndash;&gt;-->
-<!--    <mat-form-field class="full-input-field">-->
-<!--      <mat-label>Nome</mat-label>-->
-<!--      <input matInput type="text" formControlName="nome" placeholder="Nome Completo" minlength="2" required>-->
-<!--      <mat-error *ngIf="formCliente.get('nome')!.hasError('required')">O nome é obrigatório</mat-error>-->
-<!--      <mat-error *ngIf="formCliente.get('nome')!!.hasError('minlength')">O nome deve ter pelo menos 2-->
-<!--        caracteres</mat-error>-->
-<!--    </mat-form-field>-->
+<mat-dialog-content class="formulario">
+  <form [formGroup]="formGerente">
+    <!-- Nome -->
+    <mat-form-field class="full-input-field">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Nome Completo" minlength="2" required>
+      <mat-error *ngIf="formGerente.get('nome')!.hasError('required')">O nome é obrigatório</mat-error>
+      <mat-error *ngIf="formGerente.get('nome')!!.hasError('minlength')">O nome deve ter pelo menos 2
+        caracteres</mat-error>
+    </mat-form-field>
 
-<!--    &lt;!&ndash; Email &ndash;&gt;-->
-<!--    <mat-form-field class="full-input-field">-->
-<!--      <mat-label>Email</mat-label>-->
-<!--      <input matInput type="email" formControlName="email" required>-->
-<!--      <mat-error *ngIf="formCliente.get('email')!.hasError('required')">O email é obrigatório</mat-error>-->
-<!--      <mat-error *ngIf="formCliente.get('email')!.hasError('email')">Email inválido</mat-error>-->
-<!--    </mat-form-field>-->
+    <!-- Email -->
+    <mat-form-field class="full-input-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required>
+      <mat-error *ngIf="formGerente.get('email')!.hasError('required')">O email é obrigatório</mat-error>
+      <mat-error *ngIf="formGerente.get('email')!.hasError('email')">Email inválido</mat-error>
+    </mat-form-field>
 
-<!--    &lt;!&ndash; Celular &ndash;&gt;-->
-<!--    <mat-form-field class="full-input-field">-->
-<!--      <mat-label>Celular</mat-label>-->
-<!--      <input matInput type="text" formControlName="telefone" placeholder="ex. (41)99999-9999" mask="(00)00000-0000"-->
-<!--             required>-->
-<!--      <mat-error *ngIf="formCliente.get('telefone')!.hasError('required')">O celular é obrigatório!</mat-error>-->
-<!--    </mat-form-field>-->
+    <!-- Celular -->
+    <mat-form-field class="full-input-field">
+      <mat-label>Celular</mat-label>
+      <input matInput type="text" formControlName="telefone" placeholder="ex. (41)99999-9999" mask="(00)00000-0000"
+             required>
+      <mat-error *ngIf="formGerente.get('telefone')!.hasError('required')">O celular é obrigatório!</mat-error>
+    </mat-form-field>
 
-<!--    &lt;!&ndash; CPF &ndash;&gt;-->
-<!--    <mat-form-field class="half-input-field">-->
-<!--      <mat-label>CPF</mat-label>-->
-<!--      <input matInput type="text" formControlName="cpf" mask="000.000.000-00" readonly required>-->
-<!--      <mat-error *ngIf="formCliente.get('cpf')!.hasError('required')">O CPF é obrigatório!</mat-error>-->
-<!--    </mat-form-field>-->
-<!--  </form>-->
-<!--</mat-dialog-content>-->
+    <!-- CPF -->
+    <mat-form-field class="half-input-field">
+      <mat-label>CPF</mat-label>
+      <input matInput type="text" formControlName="cpf" mask="000.000.000-00" readonly required>
+      <mat-error *ngIf="formGerente.get('cpf')!.hasError('required')">O CPF é obrigatório!</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
 
-<!--<mat-dialog-actions class="botaosalvar">-->
-<!--  <button mat-raised-button color="primary" (click)="salvar()"-->
-<!--          [disabled]="!formCliente.dirty || formCliente.pristine || !formCliente.valid">Salvar</button>-->
-<!--</mat-dialog-actions>-->
+<mat-dialog-actions class="botaosalvar">
+  <button mat-raised-button color="primary" (click)="salvar()"
+          [disabled]="!formGerente.valid">Salvar</button>
+</mat-dialog-actions>
