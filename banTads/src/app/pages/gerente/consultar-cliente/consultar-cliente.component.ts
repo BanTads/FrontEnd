@@ -63,8 +63,4 @@ export class ConsultarClienteComponent {
       this.clienteDataSource = [];
     }
   }
-
-  openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
-  }
 }

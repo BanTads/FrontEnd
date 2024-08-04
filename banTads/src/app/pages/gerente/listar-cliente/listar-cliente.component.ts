@@ -6,6 +6,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {GerenteService} from "../../../services/gerente.service";
 import {Cliente} from "../../../models/cliente.model";
 import {ToastrService} from "ngx-toastr";
+import { MatDialog } from '@angular/material/dialog';
+import { ModalClienteComponent } from './modal-cliente/modal-cliente.component';
 
 @Component({
   selector: 'app-listar-cliente',
@@ -21,6 +23,7 @@ export class ListarClienteComponent implements OnInit {
   secondButtonColor: string = "btn-red";
 
   constructor(
+    public dialog: MatDialog,
     private toastr: ToastrService,
     private router: Router,
     private gerenteService: GerenteService
@@ -64,8 +67,14 @@ export class ListarClienteComponent implements OnInit {
       }
     }
   }
+  openDialog(cliente: Cliente): void {
+    const dialogRef = this.dialog.open(ModalClienteComponent, {
+      width: '600px',
+      data: cliente
+    });
 
-  openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('O diálogo foi fechado');
+    });
   }
 }

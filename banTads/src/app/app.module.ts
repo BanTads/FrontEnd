@@ -38,6 +38,7 @@ import { MotivoRecusaComponent } from './pages/gerente/motivo-recusa/motivo-recu
 import {Top3Component} from "./pages/gerente/top3/top3.component";
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule } from 'ng2-currency-mask';
+import { ModalClienteComponent } from './pages/gerente/listar-cliente/modal-cliente/modal-cliente.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -71,6 +72,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MovimentacaoComponent,
     MotivoRecusaComponent,
     Top3Component,
+    ModalClienteComponent,
   ],
   imports: [
     CurrencyMaskModule,
