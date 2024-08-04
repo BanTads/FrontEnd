@@ -53,6 +53,10 @@ export class ListarGerentesComponent {
     });
   }
 
+  novoGerente(){
+    this.router.navigate(['editar-gerente']);
+  }
+
 
   deleteGerente(gerente: Gerente) {
     this.adminService.deleteGerente(gerente).subscribe({

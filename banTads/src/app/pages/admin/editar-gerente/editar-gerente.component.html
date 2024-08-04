@@ -28,7 +28,7 @@
     <!-- CPF -->
     <mat-form-field class="half-input-field">
       <mat-label>CPF</mat-label>
-      <input matInput type="text" formControlName="cpf" mask="000.000.000-00" readonly required>
+      <input matInput type="text" formControlName="cpf" mask="000.000.000-00" required>
       <mat-error *ngIf="formGerente.get('cpf')!.hasError('required')">O CPF é obrigatório!</mat-error>
     </mat-form-field>
   </form>
