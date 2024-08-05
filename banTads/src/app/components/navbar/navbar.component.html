@@ -38,14 +38,15 @@
 		<a routerLink="/cliente/extrato" href="#" class="list-group-item list-group-item-action py-2 ripple">
 			<mat-icon>receipt</mat-icon><span> Extrato</span>
 		</a>
+		<a [routerLink]="'/meu-perfil/' + usuarioLogado" href="#"
+			class="list-group-item list-group-item-action py-2 ripple">
+			<mat-icon>person</mat-icon><span> Meu Perfil</span>
+		</a>
 	</ng-container>
 
 
 	<!-- ADICIONAR .ID NO FINAL DE USUARIO LOGADO -->
-	<a [routerLink]="'/meu-perfil/' + usuarioLogado" href="#"
-		class="list-group-item list-group-item-action py-2 ripple">
-		<mat-icon>person</mat-icon><span> Meu Perfil</span>
-	</a>
+
 
 	<a (click)="logout()" routerLink="login" class="list-group-item list-group-item" id="sair">
 		<mat-icon>exit_to_app</mat-icon><span> Sair</span>

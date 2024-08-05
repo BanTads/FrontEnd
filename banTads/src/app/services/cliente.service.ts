@@ -62,17 +62,11 @@ export class ClienteService {
       return `${year}-${month}-${day}`;
     }
     const urlNew = 'http://localhost:8083/api/conta/extrato';
-    // return this.http.get<any>(`${this.BASE_URL}/extrato`, {
     
-    return this.http.get<ApiResponseExtrato>(urlNew, {
-      params: {
-        idConta,
-        dataInicio: formatDate(dataInicio),
-        dataFim: formatDate(dataFim)
-      }
-    }).pipe(
+    return this.http.get<ApiResponseExtrato>(`${this.BASE_URL}/extrato/${idConta}/${formatDate(dataInicio)}/${formatDate(dataFim)}`).pipe(
       map(response => response.data)
     );
+    
   }
 
 

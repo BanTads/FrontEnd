@@ -4,6 +4,7 @@ import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
 import { LoginService } from '../../services/login.service';
 import { GeocodingService } from '../../services/geocoding.service'; // Importe o serviço de geocoding
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -25,7 +26,8 @@ export class EditarPerfilComponent implements OnInit {
     private fb: FormBuilder,
     private clienteService: ClienteService,
     private loginService: LoginService,
-    private geocodingService: GeocodingService
+    private geocodingService: GeocodingService,
+    private toastrService: ToastrService
   ) {
     this.formCliente = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2)]],
@@ -93,9 +95,10 @@ export class EditarPerfilComponent implements OnInit {
       this.clienteService.atualizaClientePorId(this.cliente.id, requestBody).subscribe({
         next: (response) => {
           console.log('Cliente atualizado com sucesso:', response);
+          this.toastrService.success("Perfil atualizado com sucesso")
           
         },
-        error: (error) => console.error('Erro ao atualizar cliente:', error)
+        error: (error) => this.toastrService.error("Erro ao tentar atulizar perfil, tente novamente","Erro")
       });
     }
     
