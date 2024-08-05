@@ -42,6 +42,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-ma
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule } from 'ng2-currency-mask';
 import { ModalClienteComponent } from './pages/gerente/listar-cliente/modal-cliente/modal-cliente.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { EditarGerenteComponent } from './pages/admin/editar-gerente/editar-gerente.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -77,7 +78,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     Top3Component,
     ListarClientesComponent,
     ListarGerentesComponent,
-    ModalClienteComponent
+    ModalClienteComponent,
+    EditarGerenteComponent
   ],
   imports: [
     CurrencyMaskModule,

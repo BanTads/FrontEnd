@@ -40,6 +40,23 @@ export class ListarGerentesComponent {
     });
   }
 
+  editarGerente(gerente:Gerente){
+    console.log("gerente do componente:", gerente);
+    this.router.navigate(['editar-gerente'], {
+      queryParams: {
+        id: gerente.id,
+        nome: gerente.nome,
+        email: gerente.email,
+        telefone: gerente.telefone,
+        cpf: gerente.cpf
+      }
+    });
+  }
+
+  novoGerente(){
+    this.router.navigate(['editar-gerente']);
+  }
+
 
   deleteGerente(gerente: Gerente) {
     this.adminService.deleteGerente(gerente).subscribe({

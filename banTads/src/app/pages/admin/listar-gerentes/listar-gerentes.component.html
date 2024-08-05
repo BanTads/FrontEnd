@@ -1,16 +1,21 @@
-<div class="let-of-cards">
-  <ng-container>
-    <ng-container *ngIf="gerentes.length > 0">
-      <app-rectangular-card *ngFor="let g of gerentes"
-                            [nome]="g.nome"
-                            [firstLabel]="'CPF'" [firstValue]="g.cpf"
-                            [secondLabel]="'e-mail'" [secondValue]="g.email"
-                            [thirdLabel]="'Telefone'" [thirdValue]="g.telefone"
-                            [showButton]="true" [nameButtonRect]="'Editar'" [buttonColor]="firstButtonColor"
-                            [showSecondButton]="true" [nameSecondButtonRect]="'Excluir'" [secondButtonColor]="secondButtonColor" (clickSecondButtonRect)="deleteGerente(g)">
-      </app-rectangular-card>
+<div class="content">
+  <div class="button-div">
+    <button mat-raised-button class="new-button" (click)="novoGerente()">Novo Gerente</button>
+  </div>
+  <div class="let-of-cards">
+    <ng-container>
+      <ng-container *ngIf="gerentes.length > 0">
+        <app-rectangular-card *ngFor="let g of gerentes"
+                              [nome]="g.nome"
+                              [firstLabel]="'CPF'" [firstValue]="g.cpf"
+                              [secondLabel]="'e-mail'" [secondValue]="g.email"
+                              [thirdLabel]="'Telefone'" [thirdValue]="g.telefone"
+                              [showButton]="true" [nameButtonRect]="'Editar'" [buttonColor]="firstButtonColor" (clickButtonRect)="editarGerente(g)"
+                              [showSecondButton]="true" [nameSecondButtonRect]="'Excluir'" [secondButtonColor]="secondButtonColor" (clickSecondButtonRect)="deleteGerente(g)">
+        </app-rectangular-card>
+      </ng-container>
     </ng-container>
-  </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="gerentes.length || 0"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" [length]="gerentes.length || 0"></mat-paginator>
+  </div>
 </div>
