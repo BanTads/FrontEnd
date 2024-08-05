@@ -1,0 +1,29 @@
+.extrato-container {
+    padding: 16px;
+  
+    .filter-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+  
+      mat-form-field {
+        width: 30%;
+      }
+  
+      button {
+        margin-left: 16px;
+        align-self: flex-end;
+      }
+    }
+  
+    .table-container {
+      margin-top: 16px;
+    }
+  
+    .no-data {
+      text-align: center;
+      margin-top: 32px;
+    }
+  }
+  

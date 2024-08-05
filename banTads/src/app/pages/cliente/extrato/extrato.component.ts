@@ -1,62 +1,82 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Usuario } from '../../../models/usuario.model';
-import { Observable } from 'rxjs';
+import { ChangeDetectorRef, Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { ClienteService } from '../../../services/cliente.service';
+import { ExtratoData, Movimentacao } from '../../../models/tipo-movimentacao.enum';
+import { Usuario } from '../../../models/usuario.model';
+import { Cliente } from '../../../models/cliente.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-extrato',
   templateUrl: './extrato.component.html',
-  styleUrl: './extrato.component.scss'
+  styleUrls: ['./extrato.component.scss']
 })
-export class ExtratoComponent {
+export class ExtratoComponent implements OnInit, OnDestroy {
   inputValue: string = '';
-  //usuarioLogado: Usuario = new Usuario();
-  usuarios: Usuario[] = [];
-  // usuarios: Usuario[] = [
-  //   new Usuario(1,'Saque','usuario1@email.com'),
-  //   new Usuario(2,'Depósito','usuario2@email.com'),
-  //   new Usuario(3,'Transferência','usuario3@email.com'),
-  // ];
-  buttonOne: string = "Aprovar";
-  firstButtonColor: string = "btn-green";
-  buttonTwo: string = "Recusar";
-  secondButtonColor: string = "btn-red";
+  dataInicio: Date = new Date();
+  dataFim: Date = new Date();
+  usuarioLogado: Usuario = new Usuario();
+  movimentacoes: Movimentacao[] = [];
+  contaOrigem!: number;
+  cliente!: Cliente;
+  dataSource: MatTableDataSource<Movimentacao> = new MatTableDataSource<Movimentacao>();
+  displayedColumns: string[] = ['dataHora', 'operacao', 'nomeCliente', 'valor', 'tipo', 'saldoConsolidado'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+  obs!: Observable<Movimentacao[]>;
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private router: Router,
+    private clienteService: ClienteService
+  ) {}
 
-  ) { }
   ngOnInit(): void {
+    // Fetch client information on initialization
+    this.clienteService.getClienteByCpf().subscribe({
+      next: (cliente: Cliente) => {
+        this.cliente = cliente;
+        this.contaOrigem = this.cliente.conta.numeroConta;
+        console.log('Cliente:', this.contaOrigem);
 
-
+        // Initialize dataSource after paginator is available
+        this.dataSource.paginator = this.paginator;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error fetching cliente:', error);
+      }
+    });
   }
-  @ViewChild('table') table: any;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource!: MatTableDataSource<Usuario>;
-  obs!: Observable<Usuario[]>;
+  consultaExtrato(dataInicio: Date, dataFim: Date): void {
+    this.clienteService.extrato(this.contaOrigem, dataInicio, dataFim).subscribe({
+      next: (data: ExtratoData) => {
+        console.log('Movimentações:', data);
+        this.movimentacoes = data.extrato;
+        this.dataSource.data = this.movimentacoes;
+        this.dataSource.paginator = this.paginator;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error fetching extrato:', error);
+      }
+    });
+  }
 
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    // Disconnect observable from dataSource when component is destroyed
     if (this.dataSource) {
       this.dataSource.disconnect();
     }
-  }
-
-  applyFilter(event: Event) {
-    if (this.dataSource) {
-      this.inputValue = (event.target as HTMLInputElement).value;
-      const filterValue = this.inputValue.trim().toLowerCase();
-      this.dataSource.filter = filterValue;
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
-  }
-  openDialog(usuario: Usuario) {
-    this.router.navigate([`admin/editar/${usuario.id}`]);
   }
 }

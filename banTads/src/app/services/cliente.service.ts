@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Cliente } from '../models/cliente.model';
-import {TipoMovimentacao} from "../models/tipo-movimentacao.enum";
+import { ApiResponseExtrato, ExtratoData, TipoMovimentacao } from "../models/tipo-movimentacao.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,12 @@ import {TipoMovimentacao} from "../models/tipo-movimentacao.enum";
 export class ClienteService {
   private BASE_URL = 'http://localhost:3000';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getClienteByCpf(): Observable<Cliente> {
     const cookieValue = this.cookieService.get('usuarioLogado');
     const cpf = JSON.parse(cookieValue).cliente.cpf;
-    console.log("cpf do service: ",cpf);
+    console.log("cpf do service: ", cpf);
     const url = `${this.BASE_URL}/cpf/${cpf}`;
 
     return this.http.get<any>(url).pipe(
@@ -52,6 +52,29 @@ export class ClienteService {
   atualizaClientePorId(idCliente: string, requestBody: any): Observable<any> {
     return this.http.put<any>(`${this.BASE_URL}/cliente/atualizar/${idCliente}`, requestBody);
   }
+
+  //query params: idConta, dataInicio, dataFim é um get
+  extrato(idConta: number, dataInicio: Date, dataFim: Date): Observable<ExtratoData> {
+    function formatDate(date: Date): string {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    const urlNew = 'http://localhost:8083/api/conta/extrato';
+    // return this.http.get<any>(`${this.BASE_URL}/extrato`, {
+    
+    return this.http.get<ApiResponseExtrato>(urlNew, {
+      params: {
+        idConta,
+        dataInicio: formatDate(dataInicio),
+        dataFim: formatDate(dataFim)
+      }
+    }).pipe(
+      map(response => response.data)
+    );
+  }
+
 
 
 
