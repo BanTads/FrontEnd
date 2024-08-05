@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { MotivoRecusaComponent } from "./motivo-recusa/motivo-recusa.component";
 import { GerenteService } from '../../services/gerente.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-gerente',
@@ -25,7 +26,8 @@ export class GerenteComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router,
     private gerenteService: GerenteService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
   @ViewChild('table') table: any;
@@ -81,11 +83,11 @@ export class GerenteComponent implements OnInit {
   aprovarCliente(cliente: Cliente) {
     this.gerenteService.aprovarCliente(cliente).subscribe({
       next: (response) => {
-        console.log('Usuário aprovado com sucesso', response);
+        this.toastr.success("Usuário aprovado!")
         this.removerUsuarioDaLista(cliente);
       },
       error: (error) => {
-        console.error('Erro ao aprovar usuário', error);
+        this.toastr.error("Erro ao aprovar usuário!")
       }
     });
   }
@@ -93,20 +95,20 @@ export class GerenteComponent implements OnInit {
   recusarCliente(cliente: Cliente, motivo: string) {
     this.gerenteService.recusarCliente(cliente, motivo).subscribe({
       next: (response) => {
-        console.log('Usuário recusado com sucesso', response);
+        this.toastr.warning("Usuário recusado")
         this.removerUsuarioDaLista(cliente);
       },
       error: (error) => {
-        console.error('Erro ao recusar usuário', error);
+        this.toastr.error("Erro ao recusar usuário");
       }
     });
   }
 
   formatCurrency(value: number | string): string {
     if (value == null) return '';
-    
+
     let numberValue = +value;
-    
+
     const currencyConfig = {
       align: "right",
       allowNegative: true,

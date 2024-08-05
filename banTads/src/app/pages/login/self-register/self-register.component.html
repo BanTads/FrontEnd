@@ -71,7 +71,7 @@
           O logradouro é obrigatório
         </mat-error>
       </mat-form-field>
-      
+
       <mat-form-field class="numero">
         <mat-label>Número</mat-label>
         <input matInput type="text" formControlName="numero" required>
@@ -104,10 +104,10 @@
         <mat-error *ngIf="formCliente.get('estado')!.hasError('required')">O estado é obrigatório</mat-error>
       </mat-form-field>
     </div>
-  
+
   </form>
   <mat-dialog-actions class="botaosalvar">
-    <button mat-raised-button color="primary" (click)="autocadastrar()"
+    <button mat-raised-button color="primary" (click)="autocadastrar()" mat-dialog-close
       [disabled]="!formCliente.dirty || formCliente.pristine || !formCliente.valid">Cadastrar</button>
   </mat-dialog-actions>
 </mat-dialog-content>

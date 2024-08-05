@@ -4,6 +4,7 @@ import {AutoCadastroService} from "../../../services/autocadastro.service";
 import { ClienteService } from '../../../services/cliente.service';
 import { LoginService } from '../../../services/login.service';
 import { GeocodingService } from '../../../services/geocoding.service';
+import {IndividualToastrConfig, ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-self-register',
@@ -17,7 +18,8 @@ export class SelfRegisterComponent {
   constructor(private autocadastroService: AutoCadastroService, private fb: FormBuilder,
     private clienteService: ClienteService,
     private loginService: LoginService,
-    private geocodingService: GeocodingService
+    private geocodingService: GeocodingService,
+    private toastr: ToastrService
   ) {
     this.formCliente = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2)]],
@@ -53,7 +55,7 @@ export class SelfRegisterComponent {
   };
 
   autocadastrar() {
-    
+
     const formData = this.formCliente.value;
     const requestBody = {
       nome: formData.nome,
@@ -71,10 +73,10 @@ export class SelfRegisterComponent {
         uf: formData.estado
       }
     };
-    
+
     this.autocadastroService.autocadastrar(requestBody).subscribe({
-      next: (response: any) => console.log('Cadastro realizado com sucesso!', response),
-      error: (error: any) => console.error('Erro ao realizar cadastro:', error)
+      next: (response: any) => this.toastr.success("Cadastro realizado com sucesso! Você receberá as instruções de acesso por e-mail."),
+      error: (error: any) => this.toastr.error("Erro ao realizar cadastro. Tente novamente.")
     });
   }
   searchAddress(query: string): void {
