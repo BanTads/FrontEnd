@@ -9,9 +9,9 @@
     </ng-container>
 
     <ng-container *ngIf="tipoMovimentacao === TipoMovimentacao.SAQUE">
-      <div class="saldo">
+      <div class="saldoMais">
         <p>Saldo da conta corrente + limite disponível:</p>
-        <p>R$ {{saldoContaCorrente}}</p>
+        <input matInput placeholder="Saldo da conta corrente + limite disponível" type="text" disabled [(ngModel)]="saldoContaCorrente" name="saldoContaCorrente" currencyMask [options]="CustomCurrencyMaskConfig" [readonly]="true">
       </div>
       <mat-form-field>
         <input matInput placeholder="Valor do saque" type="number" [(ngModel)]="valor" name="valor">
@@ -19,8 +19,9 @@
     </ng-container>
 
     <ng-container *ngIf="tipoMovimentacao === TipoMovimentacao.TRANSFERENCIA">
-      <div class="saldo">
-        <p>Saldo da conta corrente + limite disponível: R$ {{saldoContaCorrente}}</p>
+      <div class="saldoMais">
+        <p>Saldo da conta corrente + limite disponível:</p>
+        <input matInput placeholder="Saldo da conta corrente + limite disponível" type="text" disabled [(ngModel)]="saldoContaCorrente" name="saldoContaCorrente" currencyMask [options]="CustomCurrencyMaskConfig" [readonly]="true">
       </div>
       <mat-form-field>
         <mat-label>Valor da Transferência</mat-label>
@@ -33,7 +34,7 @@
     </ng-container>
   </div>
   <div class="btns">
-    <button mat-raised-button color="primary" (click)="movimentar()">Confirmar</button>
-    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button (click)="movimentar()">Confirmar</button>
+    <button mat-raised-button (click)="cancelar()">Cancelar</button>
   </div>
 </form>

@@ -93,11 +93,12 @@ export class EditarPerfilComponent implements OnInit {
       this.clienteService.atualizaClientePorId(this.cliente.id, requestBody).subscribe({
         next: (response) => {
           console.log('Cliente atualizado com sucesso:', response);
-          this.loginService.atualizaUsuarioLogado(response);
+          
         },
         error: (error) => console.error('Erro ao atualizar cliente:', error)
       });
     }
+    
       
   }
   

@@ -1,7 +1,7 @@
 <div class="data">
   <app-square-card
     [cardTitle]="'Saldo Atual'"
-    [cardData]="'R$ ' + cliente.conta.saldo.saldo.toString()"
+    [cardData]="'R$ ' + cliente.conta.saldo.saldo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })"
     [dataColor]="saldoColor">
   </app-square-card>
   <div class="button-group">

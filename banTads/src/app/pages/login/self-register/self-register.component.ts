@@ -5,6 +5,7 @@ import { ClienteService } from '../../../services/cliente.service';
 import { LoginService } from '../../../services/login.service';
 import { GeocodingService } from '../../../services/geocoding.service';
 import {IndividualToastrConfig, ToastrService} from "ngx-toastr";
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-self-register',
@@ -14,18 +15,22 @@ import {IndividualToastrConfig, ToastrService} from "ngx-toastr";
 export class SelfRegisterComponent {
   formCliente: FormGroup;
   addressSuggestions: any[] = [];
+  isLoading = false;
 
-  constructor(private autocadastroService: AutoCadastroService, private fb: FormBuilder,
+  constructor(
+    private autocadastroService: AutoCadastroService,
+    private fb: FormBuilder,
     private clienteService: ClienteService,
     private loginService: LoginService,
     private geocodingService: GeocodingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialogRef: MatDialogRef<SelfRegisterComponent>
   ) {
     this.formCliente = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
-      cpf: [{ value: '',}, Validators.required],
+      cpf: ['', Validators.required],
       salario: ['', Validators.required],
       tipo: ['', Validators.required],
       logradouro: ['', Validators.required],
@@ -55,7 +60,7 @@ export class SelfRegisterComponent {
   };
 
   autocadastrar() {
-
+    this.isLoading = true;
     const formData = this.formCliente.value;
     const requestBody = {
       nome: formData.nome,
@@ -75,10 +80,18 @@ export class SelfRegisterComponent {
     };
 
     this.autocadastroService.autocadastrar(requestBody).subscribe({
-      next: (response: any) => this.toastr.success("Cadastro realizado com sucesso! Você receberá as instruções de acesso por e-mail."),
-      error: (error: any) => this.toastr.error("Erro ao realizar cadastro. Tente novamente.")
+      next: (response: any) => {
+        this.isLoading = false;
+        this.toastr.success("Cadastro realizado com sucesso! Você receberá as instruções de acesso por e-mail.");
+        this.dialogRef.close();
+      },
+      error: (error: any) => {
+        this.isLoading = false;
+        this.toastr.error("Erro ao realizar cadastro. Tente novamente.");
+      }
     });
   }
+
   searchAddress(query: string): void {
     if (query.length > 3) {
       this.geocodingService.getAddressSuggestions(query).subscribe({
@@ -108,5 +121,4 @@ export class SelfRegisterComponent {
     });
     this.addressSuggestions = [];
   }
-
 }

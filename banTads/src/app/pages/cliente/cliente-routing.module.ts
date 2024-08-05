@@ -29,6 +29,7 @@ export const ClienteRoutes: Routes = [
                 path: 'movimentacao',
                 component: MovimentacaoComponent,
                 canActivate: [AuthGuard],
+                title: 'Movimentação',
                 data: { expectedRole: ['CLIENTE'] }
             },
             {

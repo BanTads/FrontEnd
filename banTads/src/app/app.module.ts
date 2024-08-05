@@ -27,7 +27,7 @@ import { GerenteComponent } from './pages/gerente/gerente.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ListarClienteComponent } from "./pages/gerente/listar-cliente/listar-cliente.component";
 import { ConsultarClienteComponent } from './pages/gerente/consultar-cliente/consultar-cliente.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { ExtratoComponent } from './pages/cliente/extrato/extrato.component';
@@ -43,6 +43,7 @@ import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule } from 'ng
 import { ModalClienteComponent } from './pages/gerente/listar-cliente/modal-cliente/modal-cliente.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { EditarGerenteComponent } from './pages/admin/editar-gerente/editar-gerente.component';
+import localePt from '@angular/common/locales/pt';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -54,6 +55,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   thousands: '.',
 
 };
+
+registerLocaleData(localePt, 'pt-BR');
+
 
 @NgModule({
   declarations: [

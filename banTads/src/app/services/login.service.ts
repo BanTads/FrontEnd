@@ -73,10 +73,5 @@ export class LoginService {
           return usuario;
         })
       );
-  }
-
-  atualizaUsuarioLogado(usuario: Usuario): void {
-    this.usuarioLogado = usuario;
-    this.usuarioLogadoSubject.next(usuario);
-  }
+  }  
 }

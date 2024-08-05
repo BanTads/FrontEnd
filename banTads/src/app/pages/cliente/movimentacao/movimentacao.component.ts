@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {ClienteService} from "../../../services/cliente.service";
 import {TipoMovimentacao} from "../../../models/tipo-movimentacao.enum";
+import { CurrencyMaskConfig } from 'ng2-currency-mask';
+import { CustomCurrencyMaskConfig } from '../../../app.module';
 
 @Component({
   selector: 'app-movimentacao',
@@ -12,11 +14,11 @@ import {TipoMovimentacao} from "../../../models/tipo-movimentacao.enum";
 export class MovimentacaoComponent implements OnInit {
   title!: string;
   tipoMovimentacao: number = 0;
-  valor: number = 0;
+  valor!: number;
   numeroContaCorrenteDestino: number = 0;
-  saldoContaCorrente: number = 0;
+  saldoContaCorrente!: number;
   contaOrigem: number = 0;
-
+  CustomCurrencyMaskConfig: CurrencyMaskConfig = CustomCurrencyMaskConfig;
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,

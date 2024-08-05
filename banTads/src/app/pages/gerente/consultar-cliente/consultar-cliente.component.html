@@ -3,7 +3,7 @@
     <form (submit)="searchClienteByCpf(input.value)">
       <mat-form-field class="search-form">
         <mat-label>Pesquisar por CPF</mat-label>
-        <input matInput #input [mask]="'000.000.000-00'" (keyup)="applyFilter($event)">
+        <input matInput #input (keyup)="applyFilter($event)">
         <button mat-icon-button matSuffix type="submit">
           <mat-icon>search</mat-icon>
         </button>

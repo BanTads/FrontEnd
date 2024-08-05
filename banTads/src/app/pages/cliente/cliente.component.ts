@@ -20,7 +20,6 @@ export class ClienteComponent implements OnInit {
   ){}
 
 
-
   ngOnInit(): void {
     this.clienteService.getClienteByCpf().subscribe({
       next: (cliente: Cliente) => {

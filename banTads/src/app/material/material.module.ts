@@ -20,7 +20,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } f
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatDialog} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 const MY_DATE_FORMAT = {
@@ -61,10 +62,12 @@ const MY_DATE_FORMAT = {
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
 
   ],
   exports: [
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
